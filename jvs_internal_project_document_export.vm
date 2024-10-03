@@ -1,0 +1,3888 @@
+#if( $documentSource ) ##
+    ## Jama 8.44 or greater
+    ## Jama 8.42 if New Velocity Feature Flag Enabled
+    #set( $docDao = $documentSource )
+    #set( $documentNodeDao = $documentSource )
+    #set( $attachmentDao = $documentSource )
+    #set( $attachmentService = $documentSource )
+    #set( $relDao = $documentSource )
+    #set( $versionDao = $documentSource )
+    #set( $testRunDao = $testSource )
+    #set( $velocityServiceWrapper = $documentSource )
+    #set( $baselineDao = $baselineSource )
+    #set( $contourItemDao = $documentSource)
+    #set( $tRunDao = $testSource)
+    #set( $testPlanDao = $testSource)
+    #set( $testSetDao = $testSource)
+    #set( $testCycleDao = $testSource)
+    #set( $userDao = $userSource)
+    ##
+#else
+    ## Jama 8.43 or older
+    #set( $docDao = $applicationContext.getBean("documentDao"))
+    #set( $documentNodeDao = $applicationContext.getBean("documentNodeDao"))
+    #set( $attachmentDao = $applicationContext.getBean("attachmentDao"))
+    #set( $attachmentService = $applicationContext.getBean("attachmentService"))
+    #set( $relDao = $applicationContext.getBean("relationshipDao") )
+    #set( $versionDao = $applicationContext.getBean("versionDao") )
+    #set( $testRunDao = $applicationContext.getBean("testRunDao") )
+    ## $velocityServiceWrapper is already available
+    #set( $baselineDao = $applicationContext.getBean("baseLineDao") )
+    #set( $contourItemDao = $applicationContext.getBean("documentDao"))
+    #set( $tRunDao = $applicationContext.getBean("testDao"))
+    #set( $testPlanDao = $applicationContext.getBean("testDao"))
+    #set( $testSetDao = $applicationContext.getBean("testDao"))
+    #set( $testCycleDao = $applicationContext.getBean("testDao"))
+    #set( $userDao = $applicationContext.getBean("userDao"))
+    ##
+#end
+
+<html
+    xmlns:v="urn:schemas-microsoft-com:vml"
+    xmlns:o="urn:schemas-microsoft-com:office:office"
+    xmlns:w="urn:schemas-microsoft-com:office:word"
+    xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
+    xmlns="http://www.w3.org/TR/REC-html40">
+    ##
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        <meta name="ProgId" content="Word.Document">
+        <meta name="Generator" content="Microsoft Word 15">
+        <meta name="Originator" content="Microsoft Word 15">
+        <link rel="File-List" href="test_files/filelist.xml">
+
+        <link rel="themeData" href="test_files/themedata.thmx">
+        <link rel="colorSchemeMapping" href="test_files/colorschememapping.xml">
+
+        #########################################################################################################################
+        ## **********************************************************************************************************************
+        ##
+        ##  2. CONSTANTS
+        ##
+        ##  >>>> Modify global constants for the report here <<<<
+        ##
+        ## **********************************************************************************************************************
+        #########################################################################################################################
+        #set( $boundaryString = "------=_NextPart_01D506B0.1F52D2B0") ##
+        #set( $filePrefix = "file:///C:/D993472D/WordTemplate.fld/") ##
+        #set( $cmpKey = "CMP") ##
+        #set( $setKey = "SET") ##
+        #set( $fldKey = "FLD") ##
+        #set( $txtKey = "TXT") ##
+        #set( $objectTypeField = "object_type" ) ##
+        #set( $timeZone = "America/Los_Angeles" ) ##
+        ##
+        ## Object Types
+        #set( $figureObjectType = "Figure" )
+        #set( $tableObjectType = "Table" )
+        #set( $equationObjectType = "Equation" )
+        #set( $informationObjectType = "Information" )
+        #set( $informationWoHeadingObjectType = "Information without Heading" )
+        ##
+        ## Status values to exlude from export
+        #set( $excludedStatuses = ["Rejected","Deleted"] ) ##
+        ##
+        ## Maximum image width and height in points.  
+        ## 468 pt is equivalant to 6.5"
+        ## 612 pt is equivalant to 8.5"
+        #set ($maxPageWidth = 468) ##
+        #set ($maxPageHeight = 612) ##
+        ##
+        ## Formatting
+        #set( $tableHeaderBackgroundColor = "#F2F2F2" )
+        #set( $tableBorderColor = "#7F7F7F" )
+
+        #if( $format == "doc" )
+
+            ##set( $primaryFont = "Candara")
+            #set( $primaryFont = "Arial")
+        #else
+            #set( $primaryFont = "Arial")
+            ##set( $primaryFont = "Arial")
+        #end
+
+        #set( $primaryFontSize = "10.0pt")
+        #########################################################################################################################
+        ## **********************************************************************************************************************
+        #########################################################################################################################
+        ##
+        #########################################################################################################################
+        ##
+        ##  3. WORD_HTML_HEADER
+        ##
+        #########################################################################################################################
+        #if( $format == "doc" )
+            <html
+                xmlns:v="3D"
+                urn:schemas-microsoft-com:vml""="urn:schemas-microsoft-com:vml"
+                ""
+                xmlns:o="3D"
+                urn:schemas-microsoft-com:office:office""="urn:schemas-microsoft-com:office:office"
+                xmlns:w="3D"
+                urn:schemas-microsoft-com:office:word""="urn:schemas-microsoft-com:office:word"
+                xmlns:m="3D"
+                http://schemas.microsoft.com/office/2004/12/omml""="http://schemas.microsoft.com/office/2004/12/omml"
+                xmlns="3D"
+                http://www.w3.org/tr/rec-html40""="http://www.w3.org/TR/REC-html40">
+            #end
+            <head>
+                #if( $format == "doc" )
+                    <meta http-equiv="3DContent-Type" content="3D" text/html;="text/html;" charset="3Dutf-8" "">
+                    <meta name="3DProgId" content="3DWord.Document">
+                    <meta name="3DGenerator" content="3D" microsoft="Microsoft" word="Word" 15""="15" "">
+                    <meta name="3DOriginator" content="3D" microsoft="Microsoft" word="Word" 15""="15" "">
+                    <link
+                        rel="3DFile-List"
+                        href="3D"
+                        wordtemplate.fld/filelist.xml""="WordTemplate.fld/filelist.xml"
+                        "">
+                    <link
+                        rel="3DEdit-Time-Data"
+                        href="3D"
+                        wordtemplate.fld/editdata.mso""="WordTemplate.fld/editdata.mso"
+                        "">
+                    <!--[if !mso]> <style> v\:* {behavior:url(#default#VML);} o\:* {behavior:url(#default#VML);} w\:* {behavior:url(#default#VML);} .shape {behavior:url(#default#VML);} </style> <![endif]-->
+                    <!--[if gte mso 9]><xml> <o:DocumentProperties> <o:Author>Jama Software</o:Author> <o:LastAuthor>Jama Software</o:LastAuthor> </o:DocumentProperties> <o:OfficeDocumentSettings> <o:AllowPNG/> </o:OfficeDocumentSettings> </xml><![endif]-->
+                    <link
+                        rel="3DdataStoreItem"
+                        href="3D"
+                        wordtemplate.fld/item0001.xml""="WordTemplate.fld/item0001.xml"
+                        ""
+                        target="3D"
+                        wordtemplate.fld/props001.xml""="WordTemplate.fld/props001.xml">
+                    <link
+                        rel="3DthemeData"
+                        href="3D"
+                        wordtemplate.fld/themedata.thmx""="WordTemplate.fld/themedata.thmx"
+                        "">
+                    <link
+                        rel="3DcolorSchemeMapping"
+                        href="3D"
+                        wordtemplate.fld/colorschememapping.xml""="WordTemplate.fld/colorschememapping.xml"
+                        "">
+
+                    #########################################################################################################################
+                    ##
+                    ##  4. PDF_HTML_HEADER
+                    ##
+                    #########################################################################################################################
+                #else
+                    <html>
+                    #end
+                    #########################################################################################################################
+                    ##
+                    ##  6. PDF_STYLE_SHEETS
+                    ##
+                    #########################################################################################################################
+                    #if( $format != "doc" )
+                        <style type="text/css">
+
+                            body,
+                            html {
+                                font-family:"Arial";
+                                font-size:${
+                                    primaryFontSize
+                                };
+                                max-width: 100%;
+                            }
+
+                            body {
+                              #if($format == "doc")
+                                margin-left: 0.5in;
+                              #else
+                              
+                                margin-left: 1in;
+                                #end
+                                counter-reset: h1counter;
+                            }
+
+                            a {
+                                color: black;
+                                text-decoration: none;
+                            }
+
+                            a:hover {
+                                color: #0060B6;
+                                text-decoration: none;
+                                cursor: pointer;
+                            }
+
+                            h1 {
+                                counter-reset: h2counter;
+                            }
+
+                            h2 {
+                                counter-reset: h3counter;
+                            }
+
+                            h3 {
+                                font-size: 17px;
+                                counter-reset: h4counter;
+                            }
+
+                            h4 {
+                                counter-reset: h5counter;
+                            }
+
+                            h5 {
+                                counter-reset: h6counter;
+                            }
+
+                            h1::before {
+                                counter-increment: h1counter;
+                                content: counter(h1counter) "\0000a0\0000a0";
+                            }
+
+                            h2::before {
+                                counter-increment: h2counter;
+                                content: counter(h1counter) "." counter(h2counter) "\0000a0\0000a0";
+                            }
+
+                            h4::before {
+                                counter-increment: h4counter;
+                                content: counter(h1counter) "." counter(h2counter) "." counter(h3counter) "." counter(h4counter) "\0000a0\0000a0";
+                            }
+
+                            h5::before {
+                                counter-increment: h5counter;
+                                content: counter(h1counter) "." counter(h2counter) "." counter(h3counter) "." counter(h4counter) "." counter(h5counter) "\0000a0\0000a0";
+                            }
+
+                            h6::before {
+                                counter-increment: h6counter;
+                                content: counter(h1counter) "." counter(h2counter) "." counter(h3counter) "." counter(h4counter) "." counter(h5counter) "." counter(h6counter) "\0000a0\0000a0";
+                            }
+                        </style>
+                    #end
+                    <style>
+                        ##
+ /* Font Definitions */
+ @font-face
+	{font-family:"Arial";
+	panose-1:2 4 5 3 5 4 6 3 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:"Arial";
+	mso-font-pitch:variable;
+	mso-font-signature:3 0 0 0 1 0;}
+@font-face
+	{font-family:"Arial";
+	panose-1:2 15 5 2 2 2 4 3 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:"Arial";
+	mso-font-pitch:variable;
+	mso-font-signature:-469750017 -1073732485 9 0 511 0;}
+@font-face
+	{font-family:"Arial";
+	panose-1:2 15 3 2 2 2 4 3 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:"Arial";
+	mso-font-pitch:variable;
+	mso-font-signature:-469750017 -1073732485 9 0 511 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-parent:"";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:8.0pt;
+	margin-left:0in;
+	line-height:107%;
+	mso-pagination:widow-orphan;
+	font-size:11.0pt;
+	font-family:"Arial";
+	mso-ascii-font-family:"Arial";
+	mso-ascii-theme-font:minor-latin;
+	mso-fareast-font-family:"Arial";
+	mso-fareast-theme-font:minor-latin;
+	mso-hansi-font-family:"Arial";
+	mso-hansi-theme-font:minor-latin;
+	mso-bidi-font-family:"Arial";
+	mso-bidi-theme-font:minor-bidi;}
+h1
+	{mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-link:"Heading 1 Char";
+	mso-style-next:Normal;
+	margin-top:35.0pt;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:0in;
+	line-height:107%;
+	mso-pagination:widow-orphan lines-together;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	font-size:16.0pt;
+	font-family:"Arial";
+	mso-ascii-font-family:"Arial";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"Arial";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"Arial";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Arial";
+	mso-bidi-theme-font:major-bidi;
+	color:#2F5496;
+	mso-themecolor:accent1;
+	mso-themeshade:191;
+	mso-font-kerning:0pt;
+	font-weight:normal;}
+span.Heading1Char
+	{mso-style-name:"Heading 1 Char";
+	mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Heading 1";
+	mso-ansi-font-size:16.0pt;
+	mso-bidi-font-size:16.0pt;
+	font-family:"Arial";
+	mso-ascii-font-family:"Arial";
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"Arial";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:"Arial";
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Arial";
+	mso-bidi-theme-font:major-bidi;
+	color:#2F5496;
+	mso-themecolor:accent1;
+	mso-themeshade:191;}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	mso-default-props:yes;
+	font-family:"Arial";
+	mso-ascii-font-family:"Arial";
+	mso-ascii-theme-font:minor-latin;
+	mso-fareast-font-family:"Arial";
+	mso-fareast-theme-font:minor-latin;
+	mso-hansi-font-family:"Arial";
+	mso-hansi-theme-font:minor-latin;
+	mso-bidi-font-family:"Arial";
+	mso-bidi-theme-font:minor-bidi;}
+.MsoPapDefault
+	{mso-style-type:export-only;
+	margin-bottom:8.0pt;
+	line-height:107%;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.WordSection1
+	{
+  #if($format == "doc")
+    padding-left: 100px;
+  #else
+  padding-left: 200px;
+  #end
+  margin-right: 25px;
+  page:WordSection1;
+  }
+  body {
+        #if($format == "doc")
+                                margin-left: 0.5in;
+                              #else
+                              margin-left: 1in;
+                              #end
+    }
+    @media print {
+    .sidebar {
+        display: none;
+    }
+    .WordSection1{
+      width: 100% !important;
+      padding-left: 0 !important;
+
+    }
+
+}
+.sidebar {
+      height: 100%;
+  overflow-y: auto; 
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #e2e5ec;
+    overflow-x: hidden;
+    border-radius: 0px 10px 0px 10px;
+    font-family:"Arial";
+    }
+    
+    .sidebar a {
+    padding: 2px 4px 2px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 15px;
+    color: #111;
+    }
+  .sidebar_up{
+    padding: 25px;
+    background-color: #1C4EFF;
+    height:45px;
+    width: 100%;
+    pointer-events: none;
+    
+    }
+
+  .collapsible {
+  background-color: #e2e5ec;
+  color: black;
+  cursor: pointer;
+  padding: 20px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 14px;
+  border-bottom: solid;
+  border-bottom-color: #b0b0b0;
+  
+}
+.active, .collapsible:hover {
+  background-color: #B3B4B7;
+}
+
+.collapsibleChild {
+  background-color: #e2e5ec;
+  color: black;
+  cursor: pointer;
+  padding: 15px;
+  padding-left:25px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 14px;
+  border-bottom: solid;
+  border-bottom-color: #dfdddc;
+}
+.active, .collapsibleChild:hover {
+  background-color: #d7d4d4;
+}
+  .image_header{
+    margin-top:25px;
+    margin-left:25px;
+    margin-bottom:60px;
+
+    height:60px;
+    width: 3000px;
+    }
+
+  .content {
+  background-color: #f1f1f1;
+    max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
+  
+
+}
+
+
+  .sidebar a:hover {
+      background-color:#d7d4d4;
+    }
+#########################################################################################################################
+##                         Macro: Returns a source string from a description                                          ###
+##                          @sText - string: string you searching                                                     ###
+##                          @return - array: an array of image sources (url)                                          ###
+#########################################################################################################################
+#macro( findSourceMHTML $sText )
+  #set( $findSourceMHTMLReturn = [])
+  #set( $lastImageIndex = $sText.lastIndexOf("<img"))  ##>             
+  #set( $startCheck = $sText.indexOf("<img")) ##>  
+  #foreach( $x in [$startCheck..$lastImageIndex])
+    #if( $x == $sText.indexOf( "<img", $x))  ##>
+      #set($end = $sText.indexOf(">", $mathTool.toInteger($x)))
+      #set( $imgString = ( $sText.substring( $mathTool.toInteger($x), $mathTool.toInteger($end))))
+      #### Debug: $imgString
+      #set( $srcStart = $imgString.indexOf("src="))
+      #set( $srcStart = $srcStart + 5)
+      #set( $srcEnd = $imgString.indexOf('"', $srcStart))
+      #set($imgSrc = $imgString.substring( $srcStart, $srcEnd ))
+      #if( $imgString.indexOf( $baseUrl) > -1 && $imgString.indexOf( "blob:http") == -1)
+        #set( $success = $findSourceMHTMLReturn.add( $imgSrc))
+      #end
+    #end
+  #end
+#end
+
+
+
+
+#########################################################################################################################
+##                     Macro: List of Macros for Electrical Requirements Tables                                       ###
+##                                                                                                                    ###
+#########################################################################################################################
+
+
+###### Macros for merging cells, each macro merges specific cells of a column ########
+
+
+#macro(mergeCellsUnit $trimmedString $range $IcReq_unt $startPoint)
+    #set($cmpt = 1)
+    #set($flag = false)
+    #set($IcReq_conditionsNewOld = "")
+    #foreach($iso in $range)
+        #set($vDoc = $documentList[$iso - 1])
+        #if($vDoc.document.documentType.documentTypeKey=="ICREQ"|| $vDoc.document.documentType.documentTypeKey=="IC_ELECT")
+            #set($trimmedString2 = $vDoc.sequence.replaceAll("\.\d{0,7}$",""))
+            #if($trimmedString == $trimmedString2)
+                #set($IcReq_conditionsNew = $velocityReportUtil.getValueForField($vDoc.document,"unt", $dateFormat))
+                #set($vDoc2 = $documentList[$startPoint + 1])
+                #set($IcReq_conditionsNew2 = $velocityReportUtil.getValueForField($vDoc2.document,"unt", $dateFormat))
+                #if($IcReq_conditionsNew2 != $IcReq_unt)
+                    #break
+                #end
+                #if($IcReq_conditionsNew == $IcReq_conditionsNewOld)
+                    #if($IcReq_conditionsNew == $IcReq_unt)
+                        #if(!$flag)
+                            #set($flag = true)
+                        #end
+                        #set($cmpt = $cmpt + 1)
+                    #else
+                        #set($flag = false)
+                    #end
+                #elseif($flag)
+                    #break
+                #end
+                #set($IcReq_conditionsNewOld = $IcReq_conditionsNew)
+            #end
+        #end
+    #end
+#end
+
+#macro(mergeCellsMaxm $trimmedString $range $IcReq_maxm $startPoint)
+    #set($cmpt = 1)
+    #set($IcReq_conditionsNewOld = "")
+    #set($flag = false)
+    #foreach($iso in $range)
+        #set($vDoc = $documentList[$iso - 1])
+        #if($vDoc.document.documentType.documentTypeKey=="ICREQ"|| $vDoc.document.documentType.documentTypeKey=="IC_ELECT")
+            #set($trimmedString2 = $vDoc.sequence.replaceAll("\.\d{0,7}$",""))
+            #if($trimmedString == $trimmedString2)
+                #set($IcReq_conditionsNew = $velocityReportUtil.getValueForField($vDoc.document,"maxm", $dateFormat))
+                #set($vDoc2 = $documentList[$startPoint + 1])
+                #set($IcReq_conditionsNew2 = $velocityReportUtil.getValueForField($vDoc2.document,"maxm", $dateFormat))
+                #if($IcReq_conditionsNew2 != $IcReq_maxm)
+                    #break
+                #end
+                #if($IcReq_conditionsNew == $IcReq_conditionsNewOld)
+                    #if($IcReq_conditionsNew == $IcReq_maxm)
+                        #if(!$flag)
+                            #set($flag = true)
+                        #end
+                        #set($cmpt = $cmpt + 1)
+                    #else
+                        #set($flag = false)
+                    #end
+                #elseif($flag)
+                    #break
+                #end
+                #set($IcReq_conditionsNewOld = $IcReq_conditionsNew)
+            #end
+        #end
+    #end
+#end
+
+#macro(mergeCellsMinm $trimmedString $range $IcReq_minm $startPoint)
+    #set($cmpt = 1)
+    #set($IcReq_conditionsNewOld = "")
+    #set($flag = false)
+      #foreach($iso in $range)
+        #set($vDoc = $documentList[$iso - 1])
+    
+    
+        #if($vDoc.document.documentType.documentTypeKey=="ICREQ"||$vDoc.document.documentType.documentTypeKey=="IC_ELECT")
+            #set($trimmedString2 = $vDoc.sequence.replaceAll("\.\d{0,7}$",""))
+
+          #if($trimmedString == $trimmedString2)
+              #set($IcReq_conditionsNew = $velocityReportUtil.getValueForField($vDoc.document,"minm", $dateFormat))
+              #set($vDoc2 = $documentList[$startPoint + 1])
+              #set($IcReq_conditionsNew2 = $velocityReportUtil.getValueForField($vDoc2.document,"minm", $dateFormat))
+
+            #if($IcReq_conditionsNew2 != $IcReq_minm)
+              #break
+            #end
+        
+            #if($IcReq_conditionsNew == $IcReq_conditionsNewOld)
+              #if($IcReq_conditionsNew == $IcReq_minm)
+                #if(!$flag)
+                    #set($flag = true)
+                #end
+            
+                #set($cmpt = $cmpt + 1)
+              #else
+                #set($flag = false)
+              #end
+            
+            #elseif($flag)
+              #break
+            #end
+              #set($IcReq_conditionsNewOld = $IcReq_conditionsNew)
+          #end
+        #end
+      #end
+#end
+
+#macro(mergeCellsTypc $trimmedString $range $IcReq_typc $startPoint)
+    #set($cmpt = 1)
+    #set($IcReq_conditionsNewOld = "")
+    #set($flag = false)
+      #foreach($iso in $range)
+        #set($vDoc = $documentList[$iso - 1])
+    
+    
+        #if($vDoc.document.documentType.documentTypeKey=="ICREQ"||$vDoc.document.documentType.documentTypeKey=="IC_ELECT")
+            #set($trimmedString2 = $vDoc.sequence.replaceAll("\.\d{0,7}$",""))
+
+          #if($trimmedString == $trimmedString2)
+              #set($IcReq_conditionsNew = $velocityReportUtil.getValueForField($vDoc.document,"typc", $dateFormat))
+              #set($vDoc2 = $documentList[$startPoint + 1])
+              #set($IcReq_conditionsNew2 = $velocityReportUtil.getValueForField($vDoc2.document,"typc", $dateFormat))
+
+            #if($IcReq_conditionsNew2 != $IcReq_typc)
+              #break
+            #end
+        
+            #if($IcReq_conditionsNew == $IcReq_conditionsNewOld)
+              #if($IcReq_conditionsNew == $IcReq_typc)
+                #if(!$flag)
+                    #set($flag = true)
+                #end
+            
+                #set($cmpt = $cmpt + 1)
+              #else
+                #set($flag = false)
+              #end
+            
+            #elseif($flag)
+              #break
+            #end
+              #set($IcReq_conditionsNewOld = $IcReq_conditionsNew)
+          #end
+        #end
+      #end
+#end
+
+#macro(mergeCellsName $trimmedString $range $IcReq_name $startPoint)
+    #set($cmpt = 1)
+    #set($IcReq_conditionsNewOld = "")
+    #set($flag = false)
+      #foreach($iso in $range)
+        #set($vDoc = $documentList[$iso - 1])
+    
+    
+        #if($vDoc.document.documentType.documentTypeKey=="ICREQ"||$vDoc.document.documentType.documentTypeKey=="IC_ELECT")
+            #set($trimmedString2 = $vDoc.sequence.replaceAll("\.\d{0,7}$",""))
+
+          #if($trimmedString == $trimmedString2)
+              #set($IcReq_conditionsNew = $velocityReportUtil.getValueForField($vDoc.document,"name", $dateFormat))
+              #set($vDoc2 = $documentList[$startPoint + 1])
+              #set($IcReq_conditionsNew2 = $velocityReportUtil.getValueForField($vDoc2.document,"name", $dateFormat))
+
+            #if($IcReq_conditionsNew2 != $IcReq_name)
+              #break
+            #end
+        
+            #if($IcReq_conditionsNew == $IcReq_conditionsNewOld)
+              #if($IcReq_conditionsNew == $IcReq_name)
+                #if(!$flag)
+                    #set($flag = true)
+                #end
+            
+                #set($cmpt = $cmpt + 1)
+              #else
+                #set($flag = false)
+              #end
+            
+            #elseif($flag)
+              #break
+            #end
+              #set($IcReq_conditionsNewOld = $IcReq_conditionsNew)
+          #end
+        #end
+      #end
+#end
+
+#macro(mergeCellsSymbol $trimmedString $range $IcReq_symbol $startPoint)
+    #set($cmpt = 1)
+    #set($IcReq_conditionsNewOld = "")
+    #set($flag = false)
+      #foreach($iso in $range)
+        #set($vDoc = $documentList[$iso - 1])
+    
+    
+        #if($vDoc.document.documentType.documentTypeKey=="ICREQ"||$vDoc.document.documentType.documentTypeKey=="IC_ELECT")
+            #set($trimmedString2 = $vDoc.sequence.replaceAll("\.\d{0,7}$",""))
+
+          #if($trimmedString == $trimmedString2)
+              #set($IcReq_conditionsNew = $velocityReportUtil.getValueForField($vDoc.document,"symbol", $dateFormat))
+              #set($vDoc2 = $documentList[$startPoint + 1])
+              #set($IcReq_conditionsNew2 = $velocityReportUtil.getValueForField($vDoc2.document,"symbol", $dateFormat))
+
+            #if($IcReq_conditionsNew2 != $IcReq_symbol)
+              #break
+            #end
+        
+            #if($IcReq_conditionsNew == $IcReq_conditionsNewOld)
+              #if($IcReq_conditionsNew == $IcReq_symbol)
+                #if(!$flag)
+                    #set($flag = true)
+                #end
+            
+                #set($cmpt = $cmpt + 1)
+              #else
+                #set($flag = false)
+              #end
+            
+            #elseif($flag)
+              #break
+            #end
+              #set($IcReq_conditionsNewOld = $IcReq_conditionsNew)
+          #end
+        #end
+      #end
+#end
+
+#macro(mergeCellsConditions $trimmedString $range $IcReq_conditions $startPoint)
+    #set($cmpt = 1)
+    #set($IcReq_conditionsNewOld = "")
+    #set($flag = false)
+      #foreach($iso in $range)
+        #set($vDoc = $documentList[$iso - 1])
+    
+    
+        #if($vDoc.document.documentType.documentTypeKey=="ICREQ"||$vDoc.document.documentType.documentTypeKey=="IC_ELECT")
+            #set($trimmedString2 = $vDoc.sequence.replaceAll("\.\d{0,7}$",""))
+
+          #if($trimmedString == $trimmedString2)
+              #set($IcReq_conditionsNew = $velocityReportUtil.getValueForField($vDoc.document,"conditions", $dateFormat))
+              #set($vDoc2 = $documentList[$startPoint + 1])
+              #set($IcReq_conditionsNew2 = $velocityReportUtil.getValueForField($vDoc2.document,"conditions", $dateFormat))
+
+            #if($IcReq_conditionsNew2 != $IcReq_conditions)
+              #break
+            #end
+        
+            #if($IcReq_conditionsNew == $IcReq_conditionsNewOld)
+              #if($IcReq_conditionsNew == $IcReq_conditions)
+                #if(!$flag)
+                    #set($flag = true)
+                #end
+            
+                #set($cmpt = $cmpt + 1)
+              #else
+                #set($flag = false)
+              #end
+            
+            #elseif($flag)
+              #break
+            #end
+              #set($IcReq_conditionsNewOld = $IcReq_conditionsNew)
+          #end
+        #end
+      #end
+#end
+
+####### Macros For Sets of values #########
+
+#macro(setElectricValues $vDoc)
+        #set( $IcReq_symbol = $velocityReportUtil.getValueForField($vDoc.document,"symbol", $dateFormat))
+        #set( $IcReq_minm = $velocityReportUtil.getValueForField($vDoc.document,"minm", $dateFormat))
+        #set( $IcReq_typc = $velocityReportUtil.getValueForField($vDoc.document,"typc", $dateFormat))
+        #set( $IcReq_maxm = $velocityReportUtil.getValueForField($vDoc.document,"maxm", $dateFormat))
+        #set( $IcReq_unt = $velocityReportUtil.getValueForField($vDoc.document,"unt", $dateFormat))
+        #set( $IcReq_conditions = $velocityReportUtil.getValueForField($vDoc.document,"conditions", $dateFormat))
+        #set( $IcReq_Name = $velocityReportUtil.getValueForField($vDoc.document,"name", $dateFormat))
+        #set( $IcReq_globalconditions = $velocityReportUtil.getValueForField($vDoc.document,"global_conditions", $dateFormat))
+#end
+
+#macro(ResetElectricValues)
+    #set($oldIcReq_unt = "")
+    #set($oldIcReq_symbol = "")
+    #set($oldIcReq_Name = "")
+    #set($oldIcReq_conditions = "")
+    #set($oldIcReq_minm = "")
+    #set($oldIcReq_typc = "")
+    #set($oldIcReq_maxm = "")
+#end
+
+#macro(SetElectricOldValue $IcReq_unt $IcReq_symbol $IcReq_Name $IcReq_conditions $IcReq_minm $IcReq_typc $IcReq_maxm)
+        #set($oldIcReq_unt = $IcReq_unt)
+        #set($oldIcReq_symbol = $IcReq_symbol)
+        #set($oldIcReq_Name = $IcReq_Name)
+        #set($oldIcReq_conditions = $IcReq_conditions)
+        #set($oldIcReq_minm = $IcReq_minm)
+        #set($oldIcReq_typc = $IcReq_typc)
+        #set($oldIcReq_maxm = $IcReq_maxm)
+#end
+#########################################################################################################################
+##                     Macro: Returns a source with a new cid and appends the base64 image to the end of the file     ###
+##                      @sText - array: string of source                                                              ###
+##                      @return - array: returns an array of strings of the new image src                             ###
+#########################################################################################################################
+#macro( imageArrayMTHML $sText )      
+  #set( $imageArrayMHTMLReturn = [])
+  #set( $imageSizeArrayMHTMLReturn = [])
+  #set( $imageBase64ArrayHTMLReturn = [])
+  ## Define a figure array if none exists (first image in the doc)
+  #if( !$figure ) 
+    #set( $figure = [] )
+  #end
+  ## Define a files array if none exists (first image in the doc)
+  #if( !$files ) 
+    #set( $files = [] ) 
+  #end
+  ##$return.clear()
+  ##set( $sourceArray = [])
+  ##SText: $sText<br>
+  #foreach( $s in $sText)  
+  ##SOURCE: $s, BASEURL: $baseUrl<br>
+    #if( $s.indexOf( $baseUrl) > -1)
+      #set( $srcEnd = $s.indexOf("attachment/"))
+      #if ( $srcEnd < 0 )
+        #set( $srcEnd = $s.indexOf("diagram/"))
+        #set( $attStart = $srcEnd + 8)
+      #else
+        #set( $attStart = $srcEnd + 11)
+      #end
+      #set( $attEnd = $s.indexOf( "/", $attStart))
+      #set( $attachmentId = $s.substring( $attStart, $attEnd))
+      
+      ##Att. id: $attachmentId<br>
+      ##Get file extension
+      #set( $fileExtStart = $s.indexOf( ".", $attEnd))
+      #set( $fileExtStart = $fileExtStart + 1)
+      #set( $fileExt = $s.substring( $fileExtStart, $s.length()))
+      #set( $f = "JAMA_IMG_")
+      #set( $f = $f.concat($attachmentId))
+      #set( $f = $f.concat("."))
+      #set( $f = $f.concat($fileExt))
+      #set( $file = '<o:File HRef="')
+      #set( $file = $file.concat( $f))
+      #set( $file = $file.concat('"/>'))
+      #if( $files.add( $file)) #end
+      #set( $jama_cid = $f)
+      #set( $newSourceLink = "cid:")
+      #set( $newSourceLink = $newSourceLink.concat( $jama_cid))
+      #if( $figure.add( $boundaryString)) #end
+      #set( $img_jama_cid = "Content-ID: ")
+      #set( $img_jama_cid = $img_jama_cid.concat( $jama_cid))
+      #if( $figure.add( $img_jama_cid)) #end
+      #if( $figure.add( "Content-Transfer-Encoding: base64 ")) #end
+      #set( $contentType =  "Content-Type: image/")
+      #set( $contentType = $contentType.concat($fileExt))
+      #if( $figure.add( $contentType)) #end
+      #if( $figure.add( "")) #end
+      #set( $base64Fig = $attachmentService.getBase64Image( $mathTool.toInteger( $attachmentId)))
+##
+      ##Fig: $base64Fig
+      ##figure $figure 
+      ## if this a PNG, get the size
+      #if( $base64Fig.substring(0, 16) == "iVBORw0KGgoAAAAN")
+        #set( $base64ImageHeader = $base64Fig.substring(16, 32) )
+        
+        #set( $binaryImageHeader = "")
+        #foreach( $i in [0..15] )
+          #set( $j = $i + 1 )
+          #set( $value = $base64ImageHeader.substring($i, $j) )
+          ##$value
+          #if( $value == "A" ) #set( $binaryImageHeader = "${binaryImageHeader}000000")
+          #elseif( $value == "B" ) #set( $binaryImageHeader = "${binaryImageHeader}000001")
+          #elseif( $value == "C" ) #set( $binaryImageHeader = "${binaryImageHeader}000010")
+          #elseif( $value == "D" ) #set( $binaryImageHeader = "${binaryImageHeader}000011")
+          #elseif( $value == "E" ) #set( $binaryImageHeader = "${binaryImageHeader}000100")
+          #elseif( $value == "F" ) #set( $binaryImageHeader = "${binaryImageHeader}000101")
+          #elseif( $value == "G" ) #set( $binaryImageHeader = "${binaryImageHeader}000110")
+          #elseif( $value == "H" ) #set( $binaryImageHeader = "${binaryImageHeader}000111")
+          #elseif( $value == "I" ) #set( $binaryImageHeader = "${binaryImageHeader}001000")
+          #elseif( $value == "J" ) #set( $binaryImageHeader = "${binaryImageHeader}001001")
+          #elseif( $value == "K" ) #set( $binaryImageHeader = "${binaryImageHeader}001010")
+          #elseif( $value == "L" ) #set( $binaryImageHeader = "${binaryImageHeader}001011")
+          #elseif( $value == "M" ) #set( $binaryImageHeader = "${binaryImageHeader}001100")
+          #elseif( $value == "N" ) #set( $binaryImageHeader = "${binaryImageHeader}001101")
+          #elseif( $value == "O" ) #set( $binaryImageHeader = "${binaryImageHeader}001110")
+          #elseif( $value == "P" ) #set( $binaryImageHeader = "${binaryImageHeader}001111")
+          #elseif( $value == "Q" ) #set( $binaryImageHeader = "${binaryImageHeader}010000")
+          #elseif( $value == "R" ) #set( $binaryImageHeader = "${binaryImageHeader}010001")
+          #elseif( $value == "S" ) #set( $binaryImageHeader = "${binaryImageHeader}010010")
+          #elseif( $value == "T" ) #set( $binaryImageHeader = "${binaryImageHeader}010011")
+          #elseif( $value == "U" ) #set( $binaryImageHeader = "${binaryImageHeader}010100")
+          #elseif( $value == "V" ) #set( $binaryImageHeader = "${binaryImageHeader}010101")
+          #elseif( $value == "W" ) #set( $binaryImageHeader = "${binaryImageHeader}010110")
+          #elseif( $value == "X" ) #set( $binaryImageHeader = "${binaryImageHeader}010111")
+          #elseif( $value == "Y" ) #set( $binaryImageHeader = "${binaryImageHeader}011000")
+          #elseif( $value == "Z" ) #set( $binaryImageHeader = "${binaryImageHeader}011001")
+          #elseif( $value == "a" ) #set( $binaryImageHeader = "${binaryImageHeader}011010")
+          #elseif( $value == "b" ) #set( $binaryImageHeader = "${binaryImageHeader}011011")
+          #elseif( $value == "c" ) #set( $binaryImageHeader = "${binaryImageHeader}011100")
+          #elseif( $value == "d" ) #set( $binaryImageHeader = "${binaryImageHeader}011101")
+          #elseif( $value == "e" ) #set( $binaryImageHeader = "${binaryImageHeader}011110")
+          #elseif( $value == "f" ) #set( $binaryImageHeader = "${binaryImageHeader}011111")
+          #elseif( $value == "g" ) #set( $binaryImageHeader = "${binaryImageHeader}100000")
+          #elseif( $value == "h" ) #set( $binaryImageHeader = "${binaryImageHeader}100001")
+          #elseif( $value == "i" ) #set( $binaryImageHeader = "${binaryImageHeader}100010")
+          #elseif( $value == "j" ) #set( $binaryImageHeader = "${binaryImageHeader}100011")
+          #elseif( $value == "k" ) #set( $binaryImageHeader = "${binaryImageHeader}100100")
+          #elseif( $value == "l" ) #set( $binaryImageHeader = "${binaryImageHeader}100101")
+          #elseif( $value == "m" ) #set( $binaryImageHeader = "${binaryImageHeader}100110")
+          #elseif( $value == "n" ) #set( $binaryImageHeader = "${binaryImageHeader}100111")
+          #elseif( $value == "o" ) #set( $binaryImageHeader = "${binaryImageHeader}101000")
+          #elseif( $value == "p" ) #set( $binaryImageHeader = "${binaryImageHeader}101001")
+          #elseif( $value == "q" ) #set( $binaryImageHeader = "${binaryImageHeader}101010")
+          #elseif( $value == "r" ) #set( $binaryImageHeader = "${binaryImageHeader}101011")
+          #elseif( $value == "s" ) #set( $binaryImageHeader = "${binaryImageHeader}101100")
+          #elseif( $value == "t" ) #set( $binaryImageHeader = "${binaryImageHeader}101101")
+          #elseif( $value == "u" ) #set( $binaryImageHeader = "${binaryImageHeader}101110")
+          #elseif( $value == "v" ) #set( $binaryImageHeader = "${binaryImageHeader}101111")
+          #elseif( $value == "w" ) #set( $binaryImageHeader = "${binaryImageHeader}110000")
+          #elseif( $value == "x" ) #set( $binaryImageHeader = "${binaryImageHeader}110001")
+          #elseif( $value == "y" ) #set( $binaryImageHeader = "${binaryImageHeader}110010")
+          #elseif( $value == "z" ) #set( $binaryImageHeader = "${binaryImageHeader}110011")
+          #elseif( $value == "0" ) #set( $binaryImageHeader = "${binaryImageHeader}110100")
+          #elseif( $value == "1" ) #set( $binaryImageHeader = "${binaryImageHeader}110101")
+          #elseif( $value == "2" ) #set( $binaryImageHeader = "${binaryImageHeader}110110")
+          #elseif( $value == "3" ) #set( $binaryImageHeader = "${binaryImageHeader}110111")
+          #elseif( $value == "4" ) #set( $binaryImageHeader = "${binaryImageHeader}111000")
+          #elseif( $value == "5" ) #set( $binaryImageHeader = "${binaryImageHeader}111001")
+          #elseif( $value == "6" ) #set( $binaryImageHeader = "${binaryImageHeader}111010")
+          #elseif( $value == "7" ) #set( $binaryImageHeader = "${binaryImageHeader}111011")
+          #elseif( $value == "8" ) #set( $binaryImageHeader = "${binaryImageHeader}111100")
+          #elseif( $value == "9" ) #set( $binaryImageHeader = "${binaryImageHeader}111101")
+          #elseif( $value == "+" ) #set( $binaryImageHeader = "${binaryImageHeader}111110")
+          #elseif( $value == "/" ) #set( $binaryImageHeader = "${binaryImageHeader}111111") #end
+        #end
+        ##IMAGE HEADER: $binaryImageHeader
+        #set( $width = $mathTool.toInteger($binaryImageHeader.substring(32, 33)) * 2147483648 +
+                       $mathTool.toInteger($binaryImageHeader.substring(33, 34)) * 1073741824 +
+                       $mathTool.toInteger($binaryImageHeader.substring(34, 35)) * 536870912 +
+                       $mathTool.toInteger($binaryImageHeader.substring(35, 36)) * 268435456 +
+                       $mathTool.toInteger($binaryImageHeader.substring(36, 37)) * 134217728 +
+                       $mathTool.toInteger($binaryImageHeader.substring(37, 38)) * 67108864 +
+                       $mathTool.toInteger($binaryImageHeader.substring(38, 39)) * 33554432 +
+                       $mathTool.toInteger($binaryImageHeader.substring(39, 40)) * 16777216 +
+                       $mathTool.toInteger($binaryImageHeader.substring(40, 41)) * 8388608 +
+                       $mathTool.toInteger($binaryImageHeader.substring(41, 42)) * 4194304 +
+                       $mathTool.toInteger($binaryImageHeader.substring(42, 43)) * 2097152 +
+                       $mathTool.toInteger($binaryImageHeader.substring(43, 44)) * 1048576 +
+                       $mathTool.toInteger($binaryImageHeader.substring(44, 45)) * 524288 +
+                       $mathTool.toInteger($binaryImageHeader.substring(45, 46)) * 262144 +
+                       $mathTool.toInteger($binaryImageHeader.substring(46, 47)) * 131072 +
+                       $mathTool.toInteger($binaryImageHeader.substring(47, 48)) * 65536 +
+                       $mathTool.toInteger($binaryImageHeader.substring(48, 49)) * 32768 +
+                       $mathTool.toInteger($binaryImageHeader.substring(49, 50)) * 16384 +
+                       $mathTool.toInteger($binaryImageHeader.substring(50, 51)) * 8192 +
+                       $mathTool.toInteger($binaryImageHeader.substring(51, 52)) * 4096 +
+                       $mathTool.toInteger($binaryImageHeader.substring(52, 53)) * 2048 +
+                       $mathTool.toInteger($binaryImageHeader.substring(53, 54)) * 1024 +
+                       $mathTool.toInteger($binaryImageHeader.substring(54, 55)) * 512 +
+                       $mathTool.toInteger($binaryImageHeader.substring(55, 56)) * 256 +
+                       $mathTool.toInteger($binaryImageHeader.substring(56, 57)) * 128 +
+                       $mathTool.toInteger($binaryImageHeader.substring(57, 58)) * 64 +
+                       $mathTool.toInteger($binaryImageHeader.substring(58, 59)) * 32 +
+                       $mathTool.toInteger($binaryImageHeader.substring(59, 60)) * 16 +
+                       $mathTool.toInteger($binaryImageHeader.substring(60, 61)) * 8 +
+                       $mathTool.toInteger($binaryImageHeader.substring(61, 62)) * 4 +
+                       $mathTool.toInteger($binaryImageHeader.substring(62, 63)) * 2 +
+                       $mathTool.toInteger($binaryImageHeader.substring(63, 64)) * 1 )
+        #set( $height = $mathTool.toInteger($binaryImageHeader.substring(64, 65)) * 2147483648 +
+                       $mathTool.toInteger($binaryImageHeader.substring(65, 66)) * 1073741824 +
+                       $mathTool.toInteger($binaryImageHeader.substring(66, 67)) * 536870912 +
+                       $mathTool.toInteger($binaryImageHeader.substring(67, 68)) * 268435456 +
+                       $mathTool.toInteger($binaryImageHeader.substring(68, 69)) * 134217728 +
+                       $mathTool.toInteger($binaryImageHeader.substring(69, 70)) * 67108864 +
+                       $mathTool.toInteger($binaryImageHeader.substring(70, 71)) * 33554432 +
+                       $mathTool.toInteger($binaryImageHeader.substring(71, 72)) * 16777216 +
+                       $mathTool.toInteger($binaryImageHeader.substring(72, 73)) * 8388608 +
+                       $mathTool.toInteger($binaryImageHeader.substring(73, 74)) * 4194304 +
+                       $mathTool.toInteger($binaryImageHeader.substring(74, 75)) * 2097152 +
+                       $mathTool.toInteger($binaryImageHeader.substring(75, 76)) * 1048576 +
+                       $mathTool.toInteger($binaryImageHeader.substring(76, 77)) * 524288 +
+                       $mathTool.toInteger($binaryImageHeader.substring(77, 78)) * 262144 +
+                       $mathTool.toInteger($binaryImageHeader.substring(78, 79)) * 131072 +
+                       $mathTool.toInteger($binaryImageHeader.substring(79, 80)) * 65536 +
+                       $mathTool.toInteger($binaryImageHeader.substring(80, 81)) * 32768 +
+                       $mathTool.toInteger($binaryImageHeader.substring(81, 82)) * 16384 +
+                       $mathTool.toInteger($binaryImageHeader.substring(82, 83)) * 8192 +
+                       $mathTool.toInteger($binaryImageHeader.substring(83, 84)) * 4096 +
+                       $mathTool.toInteger($binaryImageHeader.substring(84, 85)) * 2048 +
+                       $mathTool.toInteger($binaryImageHeader.substring(85, 86)) * 1024 +
+                       $mathTool.toInteger($binaryImageHeader.substring(86, 87)) * 512 +
+                       $mathTool.toInteger($binaryImageHeader.substring(87, 88)) * 256 +
+                       $mathTool.toInteger($binaryImageHeader.substring(88, 89)) * 128 +
+                       $mathTool.toInteger($binaryImageHeader.substring(89, 90)) * 64 +
+                       $mathTool.toInteger($binaryImageHeader.substring(90, 91)) * 32 +
+                       $mathTool.toInteger($binaryImageHeader.substring(91, 92)) * 16 +
+                       $mathTool.toInteger($binaryImageHeader.substring(92, 93)) * 8 +
+                       $mathTool.toInteger($binaryImageHeader.substring(93, 94)) * 4 +
+                       $mathTool.toInteger($binaryImageHeader.substring(94, 95)) * 2 +
+                       $mathTool.toInteger($binaryImageHeader.substring(95, 96)) * 1 )
+        #if( $imageSizeArrayMHTMLReturn.add( {"width":$width, "height":$height}) ) #end
+      #elseif( $fileExt == "svg" || $fileExt == "SVG" )
+        #set( $binaryImageHeader = "")
+        #foreach( $i in [0..2000] )
+          #set( $j = $i + 1 )
+          #set( $value = $base64Fig.substring($i, $j) )
+          ##$value
+          #if( $value == "A" ) #set( $binaryImageHeader = "${binaryImageHeader}000000")
+          #elseif( $value == "B" ) #set( $binaryImageHeader = "${binaryImageHeader}000001")
+          #elseif( $value == "C" ) #set( $binaryImageHeader = "${binaryImageHeader}000010")
+          #elseif( $value == "D" ) #set( $binaryImageHeader = "${binaryImageHeader}000011")
+          #elseif( $value == "E" ) #set( $binaryImageHeader = "${binaryImageHeader}000100")
+          #elseif( $value == "F" ) #set( $binaryImageHeader = "${binaryImageHeader}000101")
+          #elseif( $value == "G" ) #set( $binaryImageHeader = "${binaryImageHeader}000110")
+          #elseif( $value == "H" ) #set( $binaryImageHeader = "${binaryImageHeader}000111")
+          #elseif( $value == "I" ) #set( $binaryImageHeader = "${binaryImageHeader}001000")
+          #elseif( $value == "J" ) #set( $binaryImageHeader = "${binaryImageHeader}001001")
+          #elseif( $value == "K" ) #set( $binaryImageHeader = "${binaryImageHeader}001010")
+          #elseif( $value == "L" ) #set( $binaryImageHeader = "${binaryImageHeader}001011")
+          #elseif( $value == "M" ) #set( $binaryImageHeader = "${binaryImageHeader}001100")
+          #elseif( $value == "N" ) #set( $binaryImageHeader = "${binaryImageHeader}001101")
+          #elseif( $value == "O" ) #set( $binaryImageHeader = "${binaryImageHeader}001110")
+          #elseif( $value == "P" ) #set( $binaryImageHeader = "${binaryImageHeader}001111")
+          #elseif( $value == "Q" ) #set( $binaryImageHeader = "${binaryImageHeader}010000")
+          #elseif( $value == "R" ) #set( $binaryImageHeader = "${binaryImageHeader}010001")
+          #elseif( $value == "S" ) #set( $binaryImageHeader = "${binaryImageHeader}010010")
+          #elseif( $value == "T" ) #set( $binaryImageHeader = "${binaryImageHeader}010011")
+          #elseif( $value == "U" ) #set( $binaryImageHeader = "${binaryImageHeader}010100")
+          #elseif( $value == "V" ) #set( $binaryImageHeader = "${binaryImageHeader}010101")
+          #elseif( $value == "W" ) #set( $binaryImageHeader = "${binaryImageHeader}010110")
+          #elseif( $value == "X" ) #set( $binaryImageHeader = "${binaryImageHeader}010111")
+          #elseif( $value == "Y" ) #set( $binaryImageHeader = "${binaryImageHeader}011000")
+          #elseif( $value == "Z" ) #set( $binaryImageHeader = "${binaryImageHeader}011001")
+          #elseif( $value == "a" ) #set( $binaryImageHeader = "${binaryImageHeader}011010")
+          #elseif( $value == "b" ) #set( $binaryImageHeader = "${binaryImageHeader}011011")
+          #elseif( $value == "c" ) #set( $binaryImageHeader = "${binaryImageHeader}011100")
+          #elseif( $value == "d" ) #set( $binaryImageHeader = "${binaryImageHeader}011101")
+          #elseif( $value == "e" ) #set( $binaryImageHeader = "${binaryImageHeader}011110")
+          #elseif( $value == "f" ) #set( $binaryImageHeader = "${binaryImageHeader}011111")
+          #elseif( $value == "g" ) #set( $binaryImageHeader = "${binaryImageHeader}100000")
+          #elseif( $value == "h" ) #set( $binaryImageHeader = "${binaryImageHeader}100001")
+          #elseif( $value == "i" ) #set( $binaryImageHeader = "${binaryImageHeader}100010")
+          #elseif( $value == "j" ) #set( $binaryImageHeader = "${binaryImageHeader}100011")
+          #elseif( $value == "k" ) #set( $binaryImageHeader = "${binaryImageHeader}100100")
+          #elseif( $value == "l" ) #set( $binaryImageHeader = "${binaryImageHeader}100101")
+          #elseif( $value == "m" ) #set( $binaryImageHeader = "${binaryImageHeader}100110")
+          #elseif( $value == "n" ) #set( $binaryImageHeader = "${binaryImageHeader}100111")
+          #elseif( $value == "o" ) #set( $binaryImageHeader = "${binaryImageHeader}101000")
+          #elseif( $value == "p" ) #set( $binaryImageHeader = "${binaryImageHeader}101001")
+          #elseif( $value == "q" ) #set( $binaryImageHeader = "${binaryImageHeader}101010")
+          #elseif( $value == "r" ) #set( $binaryImageHeader = "${binaryImageHeader}101011")
+          #elseif( $value == "s" ) #set( $binaryImageHeader = "${binaryImageHeader}101100")
+          #elseif( $value == "t" ) #set( $binaryImageHeader = "${binaryImageHeader}101101")
+          #elseif( $value == "u" ) #set( $binaryImageHeader = "${binaryImageHeader}101110")
+          #elseif( $value == "v" ) #set( $binaryImageHeader = "${binaryImageHeader}101111")
+          #elseif( $value == "w" ) #set( $binaryImageHeader = "${binaryImageHeader}110000")
+          #elseif( $value == "x" ) #set( $binaryImageHeader = "${binaryImageHeader}110001")
+          #elseif( $value == "y" ) #set( $binaryImageHeader = "${binaryImageHeader}110010")
+          #elseif( $value == "z" ) #set( $binaryImageHeader = "${binaryImageHeader}110011")
+          #elseif( $value == "0" ) #set( $binaryImageHeader = "${binaryImageHeader}110100")
+          #elseif( $value == "1" ) #set( $binaryImageHeader = "${binaryImageHeader}110101")
+          #elseif( $value == "2" ) #set( $binaryImageHeader = "${binaryImageHeader}110110")
+          #elseif( $value == "3" ) #set( $binaryImageHeader = "${binaryImageHeader}110111")
+          #elseif( $value == "4" ) #set( $binaryImageHeader = "${binaryImageHeader}111000")
+          #elseif( $value == "5" ) #set( $binaryImageHeader = "${binaryImageHeader}111001")
+          #elseif( $value == "6" ) #set( $binaryImageHeader = "${binaryImageHeader}111010")
+          #elseif( $value == "7" ) #set( $binaryImageHeader = "${binaryImageHeader}111011")
+          #elseif( $value == "8" ) #set( $binaryImageHeader = "${binaryImageHeader}111100")
+          #elseif( $value == "9" ) #set( $binaryImageHeader = "${binaryImageHeader}111101")
+          #elseif( $value == "+" ) #set( $binaryImageHeader = "${binaryImageHeader}111110")
+          #elseif( $value == "/" ) #set( $binaryImageHeader = "${binaryImageHeader}111111") #end
+        #end
+        ##IMAGE HEADER: $binaryImageHeader
+        #set( $byteCount = $binaryImageHeader.length() / 8 -  1 )
+        #set( $ascii = "" )
+        #foreach( $byte in [0..$byteCount] )
+          #set( $i = $byte * 8)
+          #set( $j = $i + 8 )
+          #set( $value = $binaryImageHeader.substring($i, $j) )
+          #if( $value == "00100000") #set($ascii = "${ascii} ")
+          #elseif( $value == "00100001") #set($ascii = "${ascii}!")
+          #elseif( $value == "00100010") #set($ascii = "${ascii}$escapeTool.getQuote()")
+          #elseif( $value == "00100011") #set($ascii = "${ascii}#")
+          #elseif( $value == "00100100") #set($ascii = "${ascii}$")
+          #elseif( $value == "00100101") #set($ascii = "${ascii}%")
+          #elseif( $value == "00100110") #set($ascii = "${ascii}&")
+          #elseif( $value == "00100111") #set($ascii = "${ascii}'")
+          #elseif( $value == "00101000") #set($ascii = "${ascii}(")
+          #elseif( $value == "00101001") #set($ascii = "${ascii})")
+          #elseif( $value == "00101010") #set($ascii = "${ascii}*")
+          #elseif( $value == "00101011") #set($ascii = "${ascii}+")
+          #elseif( $value == "00101100") #set($ascii = "${ascii},")
+          #elseif( $value == "00101101") #set($ascii = "${ascii}-")
+          #elseif( $value == "00101110") #set($ascii = "${ascii}.")
+          #elseif( $value == "00101111") #set($ascii = "${ascii}/")
+          #elseif( $value == "00110000") #set($ascii = "${ascii}0")
+          #elseif( $value == "00110001") #set($ascii = "${ascii}1")
+          #elseif( $value == "00110010") #set($ascii = "${ascii}2")
+          #elseif( $value == "00110011") #set($ascii = "${ascii}3")
+          #elseif( $value == "00110100") #set($ascii = "${ascii}4")
+          #elseif( $value == "00110101") #set($ascii = "${ascii}5")
+          #elseif( $value == "00110110") #set($ascii = "${ascii}6")
+          #elseif( $value == "00110111") #set($ascii = "${ascii}7")
+          #elseif( $value == "00111000") #set($ascii = "${ascii}8")
+          #elseif( $value == "00111001") #set($ascii = "${ascii}9")
+          #elseif( $value == "00111010") #set($ascii = "${ascii}:")
+          #elseif( $value == "00111011") #set($ascii = "${ascii};")
+          #elseif( $value == "00111100") #set($ascii = "${ascii}<")
+          #elseif( $value == "00111101") #set($ascii = "${ascii}=")
+          #elseif( $value == "00111110") #set($ascii = "${ascii}>")
+          #elseif( $value == "00111111") #set($ascii = "${ascii}?")
+          #elseif( $value == "01000000") #set($ascii = "${ascii}@")
+          #elseif( $value == "01000001") #set($ascii = "${ascii}A")
+          #elseif( $value == "01000010") #set($ascii = "${ascii}B")
+          #elseif( $value == "01000011") #set($ascii = "${ascii}C")
+          #elseif( $value == "01000100") #set($ascii = "${ascii}D")
+          #elseif( $value == "01000101") #set($ascii = "${ascii}E")
+          #elseif( $value == "01000110") #set($ascii = "${ascii}F")
+          #elseif( $value == "01000111") #set($ascii = "${ascii}G")
+          #elseif( $value == "01001000") #set($ascii = "${ascii}H")
+          #elseif( $value == "01001001") #set($ascii = "${ascii}I")
+          #elseif( $value == "01001010") #set($ascii = "${ascii}J")
+          #elseif( $value == "01001011") #set($ascii = "${ascii}K")
+          #elseif( $value == "01001100") #set($ascii = "${ascii}L")
+          #elseif( $value == "01001101") #set($ascii = "${ascii}M")
+          #elseif( $value == "01001110") #set($ascii = "${ascii}N")
+          #elseif( $value == "01001111") #set($ascii = "${ascii}O")
+          #elseif( $value == "01010000") #set($ascii = "${ascii}P")
+          #elseif( $value == "01010001") #set($ascii = "${ascii}Q")
+          #elseif( $value == "01010010") #set($ascii = "${ascii}R")
+          #elseif( $value == "01010011") #set($ascii = "${ascii}S")
+          #elseif( $value == "01010100") #set($ascii = "${ascii}T")
+          #elseif( $value == "01010101") #set($ascii = "${ascii}U")
+          #elseif( $value == "01010110") #set($ascii = "${ascii}V")
+          #elseif( $value == "01010111") #set($ascii = "${ascii}W")
+          #elseif( $value == "01011000") #set($ascii = "${ascii}X")
+          #elseif( $value == "01011001") #set($ascii = "${ascii}Y")
+          #elseif( $value == "01011010") #set($ascii = "${ascii}Z")
+          #elseif( $value == "01011011") #set($ascii = "${ascii}[")
+          #elseif( $value == "01011100") #set($ascii = "${ascii}$escapeTool.getBackslash()")
+          #elseif( $value == "01011101") #set($ascii = "${ascii}]")
+          #elseif( $value == "01011110") #set($ascii = "${ascii}^")
+          #elseif( $value == "01011111") #set($ascii = "${ascii}_")
+          #elseif( $value == "01100000") #set($ascii = "${ascii}`")
+          #elseif( $value == "01100001") #set($ascii = "${ascii}a")
+          #elseif( $value == "01100010") #set($ascii = "${ascii}b")
+          #elseif( $value == "01100011") #set($ascii = "${ascii}c")
+          #elseif( $value == "01100100") #set($ascii = "${ascii}d")
+          #elseif( $value == "01100101") #set($ascii = "${ascii}e")
+          #elseif( $value == "01100110") #set($ascii = "${ascii}f")
+          #elseif( $value == "01100111") #set($ascii = "${ascii}g")
+          #elseif( $value == "01101000") #set($ascii = "${ascii}h")
+          #elseif( $value == "01101001") #set($ascii = "${ascii}i")
+          #elseif( $value == "01101010") #set($ascii = "${ascii}j")
+          #elseif( $value == "01101011") #set($ascii = "${ascii}k")
+          #elseif( $value == "01101100") #set($ascii = "${ascii}l")
+          #elseif( $value == "01101101") #set($ascii = "${ascii}m")
+          #elseif( $value == "01101110") #set($ascii = "${ascii}n")
+          #elseif( $value == "01101111") #set($ascii = "${ascii}o")
+          #elseif( $value == "01110000") #set($ascii = "${ascii}p")
+          #elseif( $value == "01110001") #set($ascii = "${ascii}q")
+          #elseif( $value == "01110010") #set($ascii = "${ascii}r")
+          #elseif( $value == "01110011") #set($ascii = "${ascii}s")
+          #elseif( $value == "01110100") #set($ascii = "${ascii}t")
+          #elseif( $value == "01110101") #set($ascii = "${ascii}u")
+          #elseif( $value == "01110110") #set($ascii = "${ascii}v")
+          #elseif( $value == "01110111") #set($ascii = "${ascii}w")
+          #elseif( $value == "01111000") #set($ascii = "${ascii}x")
+          #elseif( $value == "01111001") #set($ascii = "${ascii}y")
+          #elseif( $value == "01111010") #set($ascii = "${ascii}z")
+          #elseif( $value == "01111011") #set($ascii = "${ascii}{")
+          #elseif( $value == "01111100") #set($ascii = "${ascii}|")
+          #elseif( $value == "01111101") #set($ascii = "${ascii}}")
+          #elseif( $value == "01111110") #set($ascii = "${ascii}~") #end
+        #end
+        #set( $height = $ascii.replaceAll('(?s).*?<svg.*?height="(\d*).*?".*?>','$1') )
+        #set( $width = $ascii.replaceAll('(?s).*?<svg.*?width="(\d*).*?".*?>','$1') )
+        #if( $imageSizeArrayMHTMLReturn.add( {"width":$width, "height":$height}) ) #end
+      #else
+        #if( $imageSizeArrayMHTMLReturn.add( {"width":false, "height":false}) ) #end
+      #end
+      #if( $figure.add( $base64Fig)) #end
+      #if( $figure.add( "")) #end
+      #if( $base64Fig )
+        #set( $imageData = "data:image/" )
+        #set( $imageData = $imageData.concat($fileExt) )
+        #set( $imageData = $imageData.concat(";base64, ") )
+        #set( $imageData = $imageData.concat($base64Fig) )
+      #else
+        #set( $imageData = "" )
+      #end
+      #if( $imageBase64ArrayHTMLReturn.add( $imageData)) #end
+    #else ##Return the same source
+      #set( $newSourceLink = "")
+    #end
+    #if( $imageArrayMHTMLReturn.add( $newSourceLink)) #end
+  #end
+#end
+##
+#macro( convertFiguresWord $input $maxWidth )
+  #set( $output=$input)
+  $output
+#end
+
+#########################################################################################################################
+##                          Macro: Convert Figures to Word shapes and resize                                          ###
+##                           $input - string: string passed to the macro containing img tags                          ###
+##                           $maxWidth - number: maximum allowed width of images, resize if greater                   ###
+##                           Returns string with images converted to Word shapes                                      ###
+##                                                                                                                    ###
+#########################################################################################################################
+#macro( convertFigures $input $maxWidth )
+  ## clear any previous values
+  #set( $width = false )
+  #set( $height = false )
+  #set( $targetWidth = false )
+  #set( $targetHeight = false )
+  ## set a default maximum height if none is specified in the global constants
+  #if( !$maxPageHeight )
+    #set ($maxHeight = 575)
+  #else
+    #set ($maxHeight = $maxPageHeight )
+  #end
+  #* ## Placeholder for future work
+  ## Split the string into a substring per image
+  #set ( $subs = $inString.split(">"))
+
+  ## If an image is found process each image
+  #if( $subs.size() > 1 )
+    #foreach( $sub in $subs )
+      #if( !$foreach.last) #set( $sub = "${sub}>") #end
+      #if( $sub.indexOf("<img") > -1 && $sub.indexOf($baseUrl) > -1 )
+    #end
+  #end
+  *#
+
+  ## Create the initial output string
+  #set( $output = $input )
+##
+  ## process if there is at least one image tag in the string
+  #if( $input.indexOf("<img") > -1 && $input.indexOf( "blob:https") == -1 )
+    ## Create a list of all image Urls in the string
+    #findSourceMHTML( $input )
+    #set( $imgUrls = $findSourceMHTMLReturn)
+    ##URL: $imgUrls<br>
+    #### Debug imgUrls: $imgUrls
+    ## Embedded each image in the MTHML output, create a list of the sources
+    ## and create a list of the image sizes for PNG images
+    #imageArrayMTHML( $imgUrls )
+    #set( $imgSources = $imageArrayMHTMLReturn )
+    #set( $imageSizes = $imageSizeArrayMHTMLReturn )
+    #set( $imageBase64s = $imageBase64ArrayHTMLReturn )
+
+    ## For each identified image, replace the HTML image tag with a Word shape 
+    ## using the MHTML embedded image as the source
+    #foreach( $imgSource in $imgSources)
+      ## if the image is not already base64 encoded
+      #if( $imgUrls.get($foreach.index).indexOf(";base64") == -1 )
+        ## Locate the position of this image
+        #set( $sourcePosition = $input.indexOf($imgUrls.get($foreach.index)) )
+        #set( $inputStart = $input.lastIndexOf("<img", $sourcePosition) )
+        #set( $inputEnd = $input.indexOf(">", $sourcePosition) )
+        #if( $inputStart > -1 && $inputEnd > -1 )
+          #set( $inputImage = "" )
+          #set( $inputImage = $input.substring($inputStart, $inputEnd) )
+  ##
+          ## Determine the size of the image stored in HTML
+          #if( $inputImage.indexOf( "height=") > -1 && $inputImage.indexOf( "width=") > -1)
+            #set($height = $inputImage.replaceAll('(?s).*?height="([0-9]*)".*','$1'))
+            #set($width = $inputImage.replaceAll('(?s).*?width="([0-9]*)".*','$1'))
+          ## If no image size is found in HTML, use the image size extracted directly from the image
+          ## Only works for PNGs. Non-PNGs return a height and width of false
+          #elseif( $imageSizes.size() > $foreach.index )
+            #set( $height = $imageSizes.get($foreach.index).height )
+            #set( $width = $imageSizes.get($foreach.index).width )
+          #end
+          #### Debug: width=$width, height=$height
+  ##
+          ## if a hight and width are known, resize the image appropriately
+          #if( $height && $width )
+            #set( $widthInt = $mathTool.toNumber($width) )
+            #set( $heightInt = $mathTool.toNumber($height) )
+            #### Debug: $widthInt x $heightInt
+  ##
+            #set ($aspectRatio = 1.5)
+            #set ($aspectRatio = $mathTool.toDouble($widthInt) / $mathTool.toDouble($heightInt))
+            #### Debug Aspect Ratio: $aspectRatio
+  ##
+            ## if the image is a formula created by Wiris and less than the max width, reduce the size to 75%
+            #if( $input.indexOf("Wirisformula") > -1 && $widthInt <= $maxWidth )
+              #set( $targetWidth = $mathTool.mul($widthInt, 0.75) )
+              #set( $targetHeight = $mathTool.div($mathTool.toNumber($targetWidth), $aspectRatio) )
+  ##
+            ## if the image is higher than allowed, resize
+            #elseif( $heightInt > $maxHeight )
+              #set ($targetHeight = $maxHeight)
+              #set ($targetWidth = $mathTool.mul($mathTool.toNumber($targetHeight), $aspectRatio))
+  ##
+              ## if the image is still wider than allowed, resize again
+              #if( $targetWidth > $maxWidth )
+                #set ($targetWidth = $maxWidth)
+                #set ($targetHeight = $mathTool.div($mathTool.toNumber($targetWidth), $aspectRatio))
+              #end
+  ##
+            ## if the image is wider than allowed, resize
+            #elseif( $widthInt > $maxWidth )
+              #set ($targetWidth = $maxWidth)
+              #set ($targetHeight = $mathTool.div($mathTool.toNumber($targetWidth), $aspectRatio))
+  ##
+              ## if the image is still higher than allowed, resize again
+              #if( $targetHeight > $maxHeight )
+                #set ($targetHeight = $maxHeight)
+                #set ($targetWidth = $mathTool.mul($mathTool.toNumber($targetHeight), $aspectRatio))
+              #end
+            #else
+              #set ($targetWidth = $widthInt)
+              #set ($targetHeight = $heightInt)
+            #end
+          #end
+
+          ## find string for use in final replace all
+          #set( $find = "(?s)<img{^>}*?$imgUrls.get($foreach.index){^>}*?>" )
+          #set( $find = $find.replaceAll("\/", "\\/") )
+          #set( $find = $find.replaceAll("\{", "[") )
+          #set( $find = $find.replaceAll("\}", "]") )
+
+  ##
+ 
+          ## Update size for PDF output or for Word output
+          ## replace the HTML image tags with Word shapes using the images embedded in the MHTML file
+          ## if a target size has been idintified, use it, otherwise provide no size at let Word chose a size
+          #if( $format == "doc")
+            #if( !$targetHeight || !$targetWidth )
+
+              #set( $replace = "<!--[if gte vml 1]><v:shape style='visibility:visible;mso-wrap-style:square'><v:imagedata src='$imgSource' o:title='$imgSource' /></v:shape><![endif]-->" )
+            #else
+              #if( $input.indexOf("Wirisformula") > -1 )
+                #set( $replace = "<span style='position:relative;top:7.0pt;mso-text-raise:-7.0pt'><!--[if gte vml 1]><v:shape style='width:${targetWidth}pt;height:${targetHeight}pt;visibility:visible;mso-wrap-style:square'><v:imagedata src='$imgSource' o:title='$imgSource' /></v:shape><![endif]--></span>" )
+              #else
+                ##SHOULD USE THIS <br>
+                #set( $replace = "<!--[if gte vml 1]><v:shape style='width:${targetWidth}pt;height:${targetHeight}pt;visibility:visible;mso-wrap-style:square'><v:imagedata src='$imgSource' o:title='$imgSource' /></v:shape><![endif]-->" )
+              #end
+            #end
+          #elseif( $format == "pdf")
+            #set( $replace = "<img src=$imgUrls.get($foreach.index) style='height:${targetHeight}pt;width:${targetWidth}pt' />" )
+          #else
+            #set( $replace = "<img src='$imageBase64s.get($foreach.index)' style='height:${targetHeight}pt;width:${targetWidth}pt' />" )
+            #*FIND: $find <br>
+          REPLACE: $replace <br>
+          OUTPUT: $output <br>*#
+          #set( $output = $output.replaceAll($find, $replace) )
+          #end
+        
+          
+        #end
+      #end
+    #end
+    
+  #end
+  ##------------------------
+  ##  Return String        #
+  ##------------------------
+  $output
+#end
+
+#########################################################################################################################
+##          Macro: formatText
+##          Input: $inString - input string
+##          Return: string, ready for opening in Word
+#########################################################################################################################
+#macro( formatText $inString )
+#set( $string = $inString )
+## clear all span satements to remove character formatting
+#set( $string = $string.replaceAll("<span.*?>",""))
+#set( $string = $string.replaceAll("<\/span>",""))
+## clear all embedded headings from rich text fields
+##set( $string = $string.replaceAll("<h\d*?.*?>","<p><strong>"))
+##set( $string = $string.replaceAll("<\/h\d*?>","</strong></p>"))
+$string
+#end
+#########################################################################################################################
+##          Macro: formatTables
+##          Input: $inString - input string
+##                 $maxWidth - number: maximum allowed width(pts) of tables, resize if greater 
+##                 $tableAlign - left, right, center alignment of table              
+##          Return: string, ready for opening in Word
+#########################################################################################################################
+#macro( formatTables $inString $maxWidth $tableAlign )
+##
+  #if( $inString.contains("<table") )
+    ## Clear variables used in the macro
+    #set( $output = "" ) ##
+    #set( $table = false ) ##
+    #set( $tableHeader = false ) ##
+    #set( $tableCell = false ) ##
+    #set( $tableCellParagraph = false ) ##
+##
+    ## For tables, each tag that makes up the table needs to be independnetly processed, so split the description into
+    ## an array where each each value in the array is a single tag of the HTML, split on '>'
+    ## $sub = array of individual tags in the description
+    #set ( $subs = $inString.split(">"))##
+##
+    ## Iterate on each substring
+    #foreach ($sub in $subs) ##
+      ## append > to each sub except the last one since the split cut it off
+      #if( !$foreach.last) #set( $sub = "${sub}>") #end ##
+##
+      ## Determine where in a table we are
+      #if( $sub.contains("<table") ) 
+        #set( $table = true )  
+        #set( $ogTableWidthPt = false ) ## clear value since this table is new 
+        #set( $newTableWidthPt = false ) ## clear value since this table is new 
+        #set( $tableScaleFactor = false ) ## clear value since this table is new 
+      #end ##
+      #if( $sub.contains("<thead") ) #set( $tableHeader = true )  #end ##
+      #if( $sub.contains("<td") || $sub.contains("<th") ) #set( $tableCell = true )  #end ##
+      #if( $sub.contains("<p") || $sub.contains("<li") ) #set( $tableCellParagraph = true )  #end ##
+##
+      ###########################################################################
+      ## - make sure all table cells include a paragraph with an apropriate class
+      ###########################################################################
+      #if( $table )
+        #set($sub = $sub.replaceAll('<p(.*)','<p class=TableCell$1')) ##
+        #set( $sub = $sub.replaceAll('<li(.*?)>','<li class=TableCell$1>'))
+      #end
+##
+      ## cells with no formatting
+      #if( $tableCell && !$tableCellParagraph && $sub.matches("\s*[^<\s].*<\/td>") ) ##
+        #set( $end = $sub.indexOf("</td>") ) ##
+        #set( $contents = $sub.substring(0, $end) ) ##
+        #set( $sub = "<p class=TableCell>$contents</p></td>") ##
+      #end ##
+##
+      ## header cells with no formatting
+      #if( !$tableCellParagraph && $sub.matches("\s*[^<\s].*<\/th>") ) ##
+        #set( $end = $sub.indexOf("</th>") ) ##
+        #set( $contents = $sub.substring(0, $end) ) ##
+        #set( $sub = "<p class=TableCell>$contents</p></th>") ##
+      #end ##
+##
+      ## cells with strong (bold) text
+      #if( $tableCell && !$tableCellParagraph && $sub.matches("\s*[^<\s].*<\/strong>") ) ##
+        #set( $end = $sub.indexOf("</strong>") ) ##
+        #set( $contents = $sub.substring(0, $end) ) ##
+        #set( $sub = "<p class=TableCell>$contents</p></strong>") ##
+      #end ##
+      ## cells with line breaks
+      #if( $tableCell && !$tableCellParagraph && $sub.contains("<br") )
+        #set( $end = $sub.indexOf("<br") ) ##
+        #set( $contents = $sub.substring(0, $end) ) ##
+        #set( $sub = "<p class=TableCell>$contents</p>") ##
+      #end
+      ###########################################################################
+##
+      ###########################################################################
+      ## - make sure all tables have the borders collapsed
+      ###########################################################################
+      #if( $sub.contains("<table") && !$sub.contains("border-collapse") )
+          #if( $sub.contains("style") )
+            #set( $sub = $sub.replaceAll("(<table)(.*?style=[\x27\x22])(.*?)([\x27\x22].*?>)","$1$2$3;border-collapse:collapse$4") )
+          #else
+            #set( $sub = $sub.replaceAll("(<table)(.*?)(>)","$1$2 style='border-collapse:collapse'$3") )
+          #end
+      #end
+      ###########################################################################
+##
+      ###########################################################################
+      ## - add header background color
+      ###########################################################################
+      #if( ($tableHeader && $sub.contains("<td")) || $sub.matches("(?s).*<th[^e].*") )
+        #if( $sub.contains("style") )
+          #set( $replace = "$1$2;background-color:$tableHeaderBackgroundColor$3" )
+          #set( $sub = $sub.replaceAll("(<t.*?style=[\x27\x22])(.*?)([\x27\x22].*?>)",$replace) )
+        #else
+          #set( $replace = "$1 style='background-color:$tableHeaderBackgroundColor'$2" )
+          #set( $sub = $sub.replaceAll("(<t.*?)(>)",$replace) )
+        #end
+      #end
+
+      ###########################################################################
+      ## - add border color
+      ###########################################################################
+      
+      #if( $sub.contains("<td") || $sub.matches("(?s).*<th[^e].*") )
+        #if( $sub.contains("style") )
+          #set( $replace = "$1$2;border-color: $tableBorderColor$3" )
+          #set( $sub = $sub.replaceAll("(<t.*?style=[\x27\x22])(.*?)([\x27\x22].*?>)",$replace) )
+        #else
+          #set( $replace = "$1 style='border-color: $tableBorderColor'$2" )
+          #set( $sub = $sub.replaceAll("(<t.*?)(>)",$replace) )
+        #end
+      #end
+
+      ###########################################################################
+      ## - resize table widths to fit the page and use only point-based widths
+      ###########################################################################
+      #if( $sub.contains("<table") )
+        ## Try finding a width
+        #set( $tableWidth = $sub.replaceAll("(?s).*[\x22\x27; ]width.*?:.*?(\d*.*?)[;\x27\x22].*","$1") )
+        ## there is no width already, see if the cells can be added up to calculate a width
+        #if( $tableWidth == $sub)
+          #set( $calcTableWidth = 0 )
+          #set( $rowWidth = 0)
+          #set( $start = $foreach.index )
+          #set( $end = $subs.size() - 1 )
+          ## Iterate through each sub between the current position and the end of the table
+          #foreach( $i in [$start..$end] )
+            #set( $iSub = $subs.get($i) )
+            #if( $iSub.contains("<td") )
+              #set( $cellWidth = $iSub.replaceAll("(?s).*[\x22\x27; ]width\s*:\s*(\d*.*?)[;\x27\x22].*","$1") )
+              ## cell width found
+              #if( $cellWidth != $iSub)
+                ## width in pt
+                #if( $cellWidth.contains("pt") ) ##
+                  #set( $cellWidth = $mathTool.toDouble($cellWidth.substring(0,$cellWidth.indexOf("pt"))) ) ##
+                ## width in px
+                #elseif( $cellWidth.contains("px") ) ##
+                  #set( $cellWidth = $mathTool.toDouble($cellWidth.substring(0,$cellWidth.indexOf("px"))) ) ## Extract number part
+                  #set( $cellWidth = $cellWidth * 0.75 ) ## Convert px to pt
+                ## width in % or other.  Essentially ignoring
+                #else
+                  #set( $cellWidth = 0 )
+                #end
+              ## no cell width found
+              #else
+                #set( $cellWidth = 0 )
+              #end
+              #set( $rowWidth = $rowWidth + $cellWidth )
+            #end
+            ## calculate width for each row and take the widest one
+            #if( $iSub.contains("</tr") )
+              #if( $rowWidth > $calcTableWidth )
+                #set( $calcTableWidth = $rowWidth )
+              #end
+              #set( $rowWidth = 0)
+            #end
+            ## stop once the end of the table is reached in case there are mutliple tables
+            #if( $iSub.contains("</table>") )
+              #break
+            #end
+          #end
+##
+          ## Save table width in pt for cell processing 
+          #set( $ogTableWidthPt = $calcTableWidth ) 
+          #set( $newTableWidthPt = $calcTableWidth ) 
+##
+          ## Resize all tables greater than 100% to 100%
+          #if( $ogTableWidthPt > $maxWidth )
+            #set( $newTableWidthPt = $maxWidth )
+          #end
+
+          ## Resize all tables less than 1% to 100%
+          #if( $ogTableWidthPt < 1 )
+            #set( $newTableWidthPt = $maxWidth )
+          #end
+          ## Calculate resize factor for use later
+          ## Debug New Table Width (Calc): $newTableWidthPt
+          #set( $tableScaleFactor = $newTableWidthPt / $ogTableWidthPt )
+          ## Debug Scale Factor (Calc): $tableScaleFactor
+##
+          ## add a table width to the table
+          #if( $newTableWidthPt )
+            #if( $sub.contains("style") )
+              #set( $sub = $sub.replaceAll("(<table)(.*?style=[\x27\x22])(.*?)([\x27\x22].*?>)","$1$2$3;width:${newTableWidthPt}pt$4") )
+            #else
+              #set( $sub = $sub.replaceAll("(<table)(.*?)(>)","$1$2 style='width:${newTableWidthPt}pt'$3") )
+            #end
+          #else
+            #if( $sub.contains("style") )
+              #set( $sub = $sub.replaceAll("(<table)(.*?style=[\x27\x22])(.*?)([\x27\x22].*?>)","$1$2$3;width:${maxWidth}pt$4") )
+            #else
+              #set( $sub = $sub.replaceAll("(<table)(.*?)(>)","$1$2 style='width:${maxWidth}pt'$3") )
+            #end
+          #end
+        ## There is a width, convert it to a point-based width equal or less than maxWidth
+        #else
+          ## widths in pt
+          #if( $tableWidth.contains("pt") ) ##
+            #set( $tableWidth = $mathTool.toDouble($tableWidth.substring(0,$tableWidth.indexOf("pt"))) ) ##
+            ##<p>DEBUG FOUND TABLE WIDTH (pt) 1: $tableWidth</p>
+            #set( $ogTableWidthPt = $tableWidth ) ## Save table width in pt for cell processing 
+            ##<p>DEBUG FOUND TABLE WIDTH (pt) 2: $tableWidth</p>
+          ## widths in px
+          #elseif( $tableWidth.contains("px") ) ##
+            #set( $tableWidth = $mathTool.toDouble($tableWidth.substring(0,$tableWidth.indexOf("px"))) ) ## Extract number part
+            ##<p>DEBUG FOUND TABLE WIDTH (px) 1: $tableWidth</p>
+            #set( $tableWidth = $tableWidth * 0.75 ) ## Convert px to pt
+            #set( $ogTableWidthPt = $tableWidth ) ## Save table width in pt for cell processing 
+            ##<p>DEBUG FOUND TABLE WIDTH (px) 2: $tableWidth</p>
+          ## widths in %
+          #elseif( $tableWidth.contains("%") ) ##
+            #set( $tableWidth = $mathTool.toDouble($tableWidth.substring(0,$tableWidth.indexOf("%"))) ) ##
+            #set( $ogTableWidthPt = $maxWidth * ($tableWidth/100) ) ## Save table width in pt for cell processing
+            ##<p>DEBUG FOUND TABLE WIDTH (%) 1: $tableWidth</p>
+          ## unknown width, force to 100%
+          #else
+            #set( $ogTableWidthPt = $maxWidth ) ## Save table width in pt for cell processing
+          #end
+          ##<p>DEBUG FOUND TABLE WIDTH 3: $tableWidth</p>
+          #set( $newTableWidthPt = $ogTableWidthPt )
+          ## Resize all tables greater than 100% to 100%
+          #if( $ogTableWidthPt > $maxWidth )
+            #set( $newTableWidthPt = $maxWidth )
+          #end
+          ##<p>DEBUG FOUND TABLE WIDTH 4: $tableWidth</p>
+          ## Calculate resize factor for use later
+          ## Debug New Table Width: $newTableWidthPt
+          #set( $tableScaleFactor = $newTableWidthPt / $ogTableWidthPt )
+          ##<p>Debug Scale Factor: $tableScaleFactor = $newTableWidthPt divided by $ogTableWidthPt</p>
+##
+          ## replace width with new value
+          #if( $newTableWidthPt )
+            #set( $find = "(?s)(.*[\x22\x27; ]width.*?:.*?)(\d*.*?)([;\x27\x22].*)")
+            #set( $replace = "$1${newTableWidthPt}pt$3" )
+            #set( $sub = $sub.replaceAll($find, $replace) )
+          #end
+        #end
+      #end ##if( $sub.contains("<table") )
+      ###########################################################################
+##
+      ###########################################################################
+      ## - resize cell widths to use only point-based widths
+      ## - requires the following values from the table width sizing
+      ##   $newTableWidthPt
+      ##   $tableScaleFactor
+      ###########################################################################
+      #if( $sub.contains("<td") || $sub.matches("(?s).*<th[^e].*"))
+        ## Try finding a width
+        #set( $cellWidth = $sub.replaceAll("(?s).*[\x22\x27; ]width\s*:\s*(\d*.*?)[;\x27\x22].*","$1") )
+        ##<p>DEBUG cell wdith: |$cellWidth|</p>
+        ##<p>DEBUG table scale: |$tableScaleFactor|</p>
+        ##<p>DEBUG table width pt: |$newTableWidthPt|</p>
+        ## if there is a width, convert to % and scale with table resizing
+        #if( $cellWidth != $sub)
+          ## widths in pt
+          #if( $cellWidth.contains("pt") ) ##
+            #if( $tableScaleFactor && $newTableWidthPt)
+              #set( $cellWidth = $mathTool.toDouble($cellWidth.substring(0,$cellWidth.indexOf("pt"))) ) ##
+              ## Debug Start Width (pt): $cellWidth
+              ## Debug Scale Factor: $tableScaleFactor
+              #set( $cellWidthPt = $cellWidth * $tableScaleFactor ) ## Scale cell proportial to table
+              ## Debug scaled Width (pt): $cellWidth
+            #end
+          ## widths in px
+          #elseif( $cellWidth.contains("px") ) ##
+            #if( $tableScaleFactor && $newTableWidthPt)
+              #set( $cellWidth = $mathTool.toDouble($cellWidth.substring(0,$cellWidth.indexOf("px"))) ) ## Extract number part
+              #set( $cellWidth = $cellWidth * 0.75 ) ## Convert px to pt
+              #set( $cellWidthPt = $cellWidth * $tableScaleFactor ) ## Scale cell proportial to table
+              ##<p>Debug scaled Width (%): $cellWidth</p>
+            #end
+          ## widths in %
+          #elseif( $cellWidth.contains("%") ) ##
+            #set( $cellWidth = $mathTool.toDouble($cellWidth.substring(0,$cellWidth.indexOf("%"))) ) ##
+            #if( $newTableWidthPt )
+              #set( $cellWidthPt = ($cellWidth/100) * $newTableWidthPt ) ## Convert % to pt
+            #else
+              #set( $cellWidthPt = ($cellWidth/100) * $maxWidth )
+            #end
+          #else
+            ## Ignoring widths uzing unknown units
+          #end
+          ## replace width with new value
+          #if( $cellWidthPt )
+            #set( $cellWidthPt = $cellWidthPt - 4 ) ## account for cell padding
+            #set( $find = "(?s)(.*[\x22\x27; ]width.*?:.*?)(\d*.*?)([;\x27\x22].*)")
+            #set( $replace = "$1${cellWidthPt}pt$3" )
+            #set( $sub = $sub.replaceAll($find, $replace) )
+          #else
+            #set( $cellWidthPt = false )
+          #end
+        #end
+      #end
+      ###########################################################################
+      ## - resize any images in the table
+      ###########################################################################
+      #if( $tableCell && $sub.contains("<v:shape") )
+        #set( $start = $mathTool.toNumber($sub.indexOf("width")) + 6 )
+        #set( $end = $mathTool.toNumber($sub.indexOf("pt",$start)) )
+        #set( $width = $mathTool.toDouble($sub.substring($start,$end)) )
+        #set( $start = $mathTool.toNumber($sub.indexOf("height")) + 7 )
+        #set( $end = $mathTool.toNumber($sub.indexOf("pt",$start)) )
+        #set( $height = $mathTool.toDouble($sub.substring($start,$end)) )
+        #set( $aspectRatio = $height / $width )
+        ##<p>DEUBG cell width: $cellWidthPt</p>
+        ##<p>DEUBG img width: $width</p>
+
+        #if( $cellWidthPt )
+          #if( $width > ($cellWidthPt - 8) )
+            #set( $width = $cellWidthPt - 8 )
+            #set( $height = $width * $aspectRatio )
+            #set( $replace = "width:${width}pt" )
+            #set( $sub = $sub.replaceAll("width:([\d\.]*?)pt",$replace) )
+            #set( $replace = "height:${height}pt" )
+            #set( $sub = $sub.replaceAll("height:([\d\.]*?)pt",$replace) )
+          #end
+        #end
+      #end
+      ###########################################################################
+      ## - align table per $tableAlign, remove any align statement coming from Jama
+      ###########################################################################
+      #if( $sub.contains("<table") )
+        #set( $sub = $sub.replaceAll("align=[\x27\x22].*?[\x27\x22] ", "") )
+      #end
+      #if( $sub.contains("<table") )
+        #set( $sub = "<div align=$tableAlign>$sub")
+      #end
+      #if( $sub.contains("</table") )
+        #set( $sub = "$sub</div>")
+      #end
+      #if( $sub.contains("<table") )
+        #set( $sub = $sub.replaceAll("margin-left:.*?[;\x27\x22]", "") )
+      #end
+      #if( $sub.contains("<td") || $sub.contains("<th") )
+        #set( $sub = $sub.replaceAll("padding.*?[;\x27\x22]", "") )
+      #end
+      ###########################################################################
+      ## add the processed sub to the output string
+      #set ( $output = "${output}${sub}" ) ##
+      ## Determine where in a table we are
+      #if( $sub.contains("</p") || $sub.contains("</li") ) #set( $tableCellParagraph = false )  #end ##
+      #if( $sub.contains("</thead") ) #set( $tableHeader = false ) #end ##
+      #if( $sub.contains("</td") || $sub.contains("</th") ) #set( $tableCell = false ) #end ##
+      #if( $sub.contains("</table") ) #set( $table = false ) #end ##
+    #end ##foreach ($sub in $subs)
+  #else ##
+    #set ( $output = $inString )
+  #end ##if( $inString.contains("<table") )
+
+  $output
+#end
+#########################################################################################################################
+##          Macro: convertHyperlinks
+##          Input: $inString - input string
+##          Return: string, ready for opening in Word
+#########################################################################################################################
+#macro( convertHyperlinks $inString )
+  ## Reset variables used in the macro
+  #set( $subs = [] )
+  #set( $output = "" )
+  #set( $destDoc = false )
+  #set( $deleteNextSub = false )
+##
+  ## split the string by > to break it up into HTML tags
+  #set ( $subs = $inString.split(">"))
+##
+  ## Parse each substring
+  #foreach ($sub in $subs) ##
+    ## split removes the split character, so all subs are missing a > except for the last one
+    #if( !$foreach.last) #set( $sub = "${sub}>") #end
+    ## Hyperlinks are made up of two HTML tags.  If replacing a hyperlink weas just replaced, delete the second part of it
+    #if( !$deleteNextSub )
+      ## only process strings that contain a docID and the current Jama base URL, indicating they are hyperinks to a Jama item
+      #if( $sub.contains("docId=") && $sub.contains($baseUrl) )
+        ##Locate the doc ID in the string
+        #set( $docIdStart = $sub.indexOf("docId=") + 6 )
+        ## the doc ID might before or after the project ID, so check for & or " as the next character
+        #set( $docIdEnd = $sub.indexOf( "&", $docIdStart))
+        #if( $docIdEnd == -1 )
+          #set( $docIdEnd = $sub.indexOf( '"', $docIdStart))
+        #end
+        ## Extract the doc ID from the string
+        #set( $docId = $sub.substring( $docIdStart, $docIdEnd))
+        ## Get the document corresponding to the docID
+        #set ( $destDoc = $docDao.getDocument( $mathTool.toInteger($docId) ))
+        
+        ## Validate that the destination Doc was found
+        #if ( $destDoc && $referenceableDocIds.contains($destDoc.id) )
+          ## Find out the $objectTypeField of the destination item, if it has one
+          #set( $destObjectType = false )
+          #foreach( $destTypeField in $destDoc.documentType.documentTypeFields )
+            #if( $destTypeField.documentField.name == $objectTypeField )
+              #set ( $destObjectType = $velocityReportUtil.getValueForField($destDoc, $objectTypeField, $dateFormat ) )
+              #break
+            #end
+          #end
+  ##
+          ## Replace the hyperink with a Word cross-reference appropriate for the type of destination item
+          #if( $format == "doc" )
+          #else
+            #if( $destObjectType == "Figure" )
+              #set( $referenceLabel = "Figure ?" )
+              #foreach( $figure in $figureList)
+                #if( $figure.id == $mathTool.toInteger($docId) ) 
+                  #set( $referenceLabel = "Figure $figure.reference" )
+                  #break
+                #end
+              #end
+              #set ($sub = $sub.replaceAll("(?s)<a.*docId=([0-9]*).*>", "<a href='#_API${docId}'>$referenceLabel</a>") )
+              #set( $deleteNextSub = true )
+            #elseif( $destObjectType == "Table" )
+              #set( $referenceLabel = "Table ?" )
+              #foreach( $table in $tableList)
+                #if( $table.id == $mathTool.toInteger($docId) ) 
+                  #set( $referenceLabel = "Table $table.reference" )
+                  #break
+                #end
+              #end
+              #set ($sub = $sub.replaceAll("(?s)<a.*docId=([0-9]*).*>", "<a href='#_API${docId}'>$referenceLabel</a>") )
+              #set( $deleteNextSub = true )
+            #elseif( $destObjectType == "Equation" )
+              #set( $referenceLabel = "eq. ?" )
+              #foreach( $equation in $equationList)
+                #if( $equation.id == $mathTool.toInteger($docId) ) 
+                  #set( $referenceLabel = "eq. $equation.reference" )
+                  #break
+                #end
+              #end
+              #set ($sub = $sub.replaceAll("(?s)<a.*docId=([0-9]*).*>", "<a href='#_API${docId}'>$referenceLabel</a>") )
+              #set( $deleteNextSub = true )
+            #else
+              #set ($sub = $sub.replaceAll("(?s)<a.*docId=([0-9]*).*>", "<a href='#_API${docId}'>$destDoc.name</a>") )
+              #set( $deleteNextSub = true )
+            #end
+          #end
+        #end
+      #end
+      ## append the converted sub to the output string
+      #set ( $output = "${output}${sub}" ) ##
+    #else
+      #if( $sub.indexOf("</a>") > -1 )
+        #set( $deleteNextSub = false )
+      #end
+    #end
+  #end ##
+  ## return the string with hyperlinks replaced with Word cross-references
+  $output
+#end
+
+#########################################################################################################################
+##          Macro: formatRichText
+##          Input: $inString - input string
+##          Return: string, ready for opening in Word
+#########################################################################################################################
+#macro( formatRichText $inString )
+    #if( $inString )
+        #set( $string = $inString.toString() )
+        ## Re-format text for consistent look and feel
+        #set( $string = "#formatText($string)" )
+        ## Prep figures for Word, use globally defined maximum width
+        #set( $string = "#convertFigures($string, $maxPageWidth)" )
+        ## Re-format tables for consistent look and feel
+        #set( $string = "#formatTables($string, $maxPageWidth, 'center')" )
+        ## Convert hyperlinks in Jama to Word cross-references
+        #set( $string = "#convertHyperlinks($string)" )
+        ## format lists appropriately
+        #set( $string = $string.replaceAll('<li>','<li class=MsoListParagraph>'))
+        #set( $string = $string.replaceAll('<li\s([^c].*?)>','<li class=MsoListParagraph $1>'))
+        ## Make sure all content that is not already in a paragraph with a class is in a paragraph with class Normal
+        #if( !$string.contains("<p"))
+            #set( $string = "<p class=MsoNormal>$string</p>" )
+        #else
+            #set( $string = $string.replaceAll("<p>","<p class=MsoNormal>") )
+            #set( $string = $string.replaceAll("<p\s([^c].*?)>","<p class=MsoNormal $1>") )
+        #end
+        $string
+    #end
+#end
+
+
+
+##
+img {
+    display: block;
+    height:auto;
+    max-height: 500px;
+    max-width: 750px;
+}
+##
+#if($format == "doc")
+    table.ElecChar    { border-collapse:collapse; border:none; width:650px;}
+#else
+    table.ElecChar    { border-collapse:collapse; border:none; width:95%;}
+#end
+table.ElecChar th { border:solid windowtext 1.0pt; background: #D7E3ED; padding: 0in 5.4pt 0in 1.4pt; height: 25.85pt}
+table.ElecChar td { border:solid windowtext 1.0pt; padding: 4pt; height: 13.2pt; text-align: center;}
+##
+#if($format == "doc")
+    table.RegAddress    { border-collapse:collapse; border:none; width:650px}
+    table.RegAddress th { word-break: break-all; border:solid windowtext 1.0pt;font-size:7pt; background: #D7E3ED; padding: 0pt; height: 25.85pt}
+    table.RegAddress td { word-break: break-all; border:solid windowtext 1.0pt; padding: 0pt;font-size:7pt; height: 13.2pt; text-align: center;}
+#else
+    table.RegAddress    { border-collapse:collapse; border:none; width:95% !important; table-layout: fixed;}
+    table.RegAddress th { border:solid windowtext 1.0pt;font-size:10pt; background: #D7E3ED; padding: 0in 5.4pt 0in 1.4pt; height: 25.85pt}
+    table.RegAddress td { border:solid windowtext 1.0pt; padding: 4pt;font-size:10pt; height: 13.2pt; text-align: center;}
+#end
+
+#if($format == "doc")
+    table.RegAddress2    { border-collapse:collapse; border:none; width:450px; table-layout: fixed !important}
+    table.RegAddress2 th { border:solid windowtext 1.0pt;font-size:7pt; background: #D7E3ED; padding: 0pt; height: 25.85pt}
+    table.RegAddress2 td { border:solid windowtext 1.0pt; padding: 0pt;font-size:7pt; height: 13.2pt; text-align: center;}
+#else
+    table.RegAddress2    { border-collapse:collapse; border:none; width:50% !important; table-layout: fixed;}
+    table.RegAddress2 th { border:solid windowtext 1.0pt;font-size:10pt; background: #D7E3ED; padding: 0in 5.4pt 0in 1.4pt; height: 25.85pt}
+    table.RegAddress2 td { border:solid windowtext 1.0pt; padding: 4pt;font-size:10pt; height: 13.2pt; text-align: center;}
+#end
+
+##
+table.PinDesc {width: 100%; border-collapse:collapse; border:none; margin-bottom=2em}
+table.PinDesc th {width: 56.75pt; border:solid windowtext 1.0pt; background: #D7E3ED; padding: 0in 2.85pt 0in 2.85pt; height: 25.0pt}
+table.PinDesc td {width: 56.75pt; border:solid windowtext 1.0pt; border-top: none; padding: 0in 2.85pt 0in 2.85pt; height: 13.4pt}
+##
+table.Offset {width: auto; border-collapse:collapse; border:none}
+table.Offset th {width: 28.1pt; border:solid windowtext 1.0pt; padding: 0in 0in 0in 0in; height: 8.0pt;background: #D7E3ED}
+table.Offset td {width: 28.1pt; border:solid windowtext 1.0pt; border-top: none; padding: 0in 0in 0in 0in; height: 8.4pt}
+##
+table.RegAdd {width: auto; border-collapse:collapse; border:none}
+table.RegAdd th {width: 28.1pt; border:solid windowtext 1.0pt; padding: 0in 0in 0in 0in; height: 8.0pt;background: #D7E3ED}
+table.RegAdd td {width: 28.1pt; border:solid windowtext 1.0pt; border-top: none; padding: 0in 0in 0in 0in; height: 8.4pt}
+##
+table.RegMap {width: 100%; border-collapse:collapse; border:none}
+table.RegMap th {width: 28.1pt; border:solid windowtext 1.0pt; padding: 0in 0in 0in 0in; height: 8.0pt}
+table.RegMap td {width: 28.1pt; border:solid windowtext 1.0pt; border-top: none; padding: 0in 0in 0in 0in; height: 8.4pt}
+##
+table.TableBitfields {width: 95%; border-collapse:collapse; border:none}
+table.TableBitfields th {width: 100%; border: solid windowtext 1.0pt; padding: 0in 0in 0in 0in; height: 8.0pt; background-color: #D7E3ED}
+table.TableBitfields td {width: 100%; border-collapse:collapse; border:solid windowtext 1.0pt; padding: 0in 0in 0in 0in; height: 30pt}
+#if($format == "doc")
+    #if($mcuProject == true)
+        table.TableBits { width: 650px}
+    #else
+        table.TableBits { width: 75%}
+    #end
+    table.TableBits th { word-break: break-all; width: 35pt; border:none; border-style: none none none none; padding: 0in 0in 0in 0in; height: 25pt; font-size: 8pt; background-color: #D7E3ED}
+    table.TableBits td { word-break: break-all; border:none; padding: 0in 0in 0in 0in; height: 25pt; font-size: 8pt; font-weight: bold; background-color: #F0F0F0}
+    table.TableBits tr { word-break: break-all; border:none; border-top: none; padding: 0in 0in 0in 0in; height: 25pt}
+#else
+    table.TableBits {width: 500pt; table-layout: fixed}
+    table.TableBits th {width: 35pt; border:none; border-style: none none none none; padding: 0in 0in 0in 0in; height: 25pt; font-size: 8pt; background-color: #D7E3ED}
+    table.TableBits td {width: 35pt; border:none; padding: 0in 0in 0in 0in; height: 25pt; font-size: 8pt; font-weight: bold; background-color: #F0F0F0}
+    table.TableBits tr {width: 35pt; border:none; border-top: none; padding: 0in 0in 0in 0in; height: 25pt}
+#end
+
+
+table.bitfield_map {width: 100%; border: none !important}
+table.bitfield_map th {padding: 0pt 0pt 0pt 0pt ; height: 9.0pt; border: none !important}
+table.bitfield_map td {padding: 0pt 0pt 0pt 0pt; height: 10pt!important; font-size: 9pt; border: none !important}
+table.bitfield_map tr {border-top: none; padding: 0pt 0pt 0pt 0pt; height: 0pt; border: none !important}
+
+#if($format != "doc")
+td.title {display: none; border-style: none none solid solid;}
+#end
+##
+#if($format != "doc")
+table.IOS_Checklist {width: 100%, border: none; border-collapse: collapse}
+#else
+table.IOS_Checklist {width: 80%, border: none; border-collapse: collapse}
+table.IOS_Checklist td {width: 22pt}
+#end
+
+##
+#if($format == "doc")
+table.TableDescription {width: 650px;border:none; border-collapse: collapse}
+#else
+  table.TableDescription {width: 95%;border:none; border-collapse: collapse}
+#end
+
+table.TableDescription th {word-break: break-all; border:solid windowtext 1.0pt;padding: 0in 0in 0in 0in; height: 8.0pt; background-color: #D7E3ED; font-size: 12pt}
+table.TableDescription td {word-break: break-all; border:solid windowtext 1.0pt;padding: 0in 0in 0in 0in; height: 20pt; font-size: 10pt}
+##
+img {width: 40%; height: 40%;}
+img.Header123 {display: block;
+            height:60px;
+            width:100%;
+            max-height: 20%;
+            max-width: 100%;
+                margin-top:35px;
+    margin-left:25px;
+    margin-bottom:60px;}
+
+</style>
+##
+</head>
+##
+<body lang=EN-US style='tab-interval:.5in;word-wrap:break-word'>
+##
+
+<div class=WordSection1>
+
+
+
+<img class=Header123 src=" data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABvMAAAAyCAYAAABh9ydtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFxEAABcRAcom8z8AAA2tSURBVHhe7d19jFzXWcfx5zlndtfrpsEhuPbas0maFqlqZORSm/Q9IISztb3rBnX/iBASUQTirRKEBloISqoU0fxhUCVEBapatSpS0bYk3nXltQA1LhKCxisHqZSWWE7trNclLkr8Ujueuec8nDtzYhJns9mZXe/Oznw/8rHnPHfm3nPuzF/+6ZyrspBx8xufl8H1G6RihSz83jVi0FsRalI7Pu2u5FJb3v0b1nfulA3WvPpcWhWV9RIvX5b6mYPykojGXG7brXfZuguD1n/DCs+rf4OFekVrJ7+kaR4L2/KReLPWper75flTj7szuQwAAAAAAAAAANB15g3ofuqeONQf5F4Vu1vE3qFB3pQPrXnRS13Nn1aJR830wOkz+k8yo/V8+A0N7bVbnI/3a7C7zclt6d5U8qFVE1RedE7/S6MeihX5+7kn3P/mQ4vykyPxxvUV2SvORkK07c5kU/phrGxIqRKiyvPpxX+4NI83eZn8/qS7kI9eVb0n7pRo91rUs6rinei/nZpM3yEAAAAAAAAAAEAXuibMM906Zr+qEh9V529pHI2p2jzYNbScV2pWD9Gc/rOJ/tHcpDvWPPr6tozGvc7iX2ufHy5vinXQjWnMKQm18J/Oud+ZPeiONCsLGx6N+wqLj1a83yYuFVbx+25M4eUxxPB06nxydspNl+WGcfPVmv2+mgyk7+yno8mTKjZ0esr9eX4HAAAAAAAAAABAVymjk6aHzW0di59yFr8ozt9iZaAScmDVZe3luYn3LvklJ/HwlrE4liqva3hf/KC4+GWt+OHGfUnnmO/cq9Uac0rND/g70jgnbhmN709HXt+4+a2j9oi5+LVKxW8rv+fV/r5fOYZ0n7cHi/9QHY0fS0cb3lmuFoxpdiIX07GXVO2kpL/yYQAAAAAAAAAAgK5zNcyrHrM/UOf+1Jx35cqonlCGR+Vcnd/oYvxCdSx+qHngGuPWHyR+2jt/U+P9HawMwzTNJ4h+9u0j8cZcfo3qZfsT5+VhEV/pxDmV8/DeD0aL+6uj8d6y9t0JrUWV76WjW9R0QtV2SbTTjQ8AAAAAAAAAAAB0oUaYN7wnflAkPnJ1lVSviY2VYDenF385XwA2XLM70z93dnqQ97JynM7Lu68MSCMEu9bWfXF3lPjQ1VV4nSqNzVd8n7n4Z+WzCsvS3IB+oyL6VRXZIIU+vvmMfrXxXgAAAAAAAAAAgC7kxsfNR28PqffrezLIy/IKvZ+9tE5+pVn5f+m2bPPqB9ba/TGxj951l1Vyt6H60TioFh8qQ7K1MJ9GMOn8W72z+xqFCQ0nJ92x0wfd12e/4b49M6P1Rh0AAAAAAAAAAKALuX+/Ir9g0X5+raw6u540NVfYePk8uWYlizKYX60Z5aq7UNiOH2yQai411WQkTfQ9a+r7TnNRjXs2jtsNuQIAAAAAAAAAANATXCFxzPf5/rW26ux6aG47aXfcWpPhZqVJdQ3enTRiX/EbCrO35kqDie1R58vccs0og8ciyrZ1F2xTLgEAAAAAAAAAAPQE58Tez6q8rIzsvH9LvS4bmoVlUkZn7bYlyKe4rdkTGdpr61XsnUuKJl85thVs3slA0SebUw8AAAAAAAAAAKBnuBDk9jW47uz6KYOjyqufM7ckIUQpwgWzcL7VFotQU5fP0440lyhyU+6V1qevenNjBWIbyrGU40pzel4snF3B9qP0G/2ReC2jPQAAAAAAAAAAgJ6hQ6PFZa9+Xe5D0x+znc9NuqO5IsNj8QFxur/lFYxl9GThpEQ3XqnLefOy+GjOqQVvfRbt19J4fk+cbznWK8O3GOwTp6fcY2V/0z3xLX1FnEnnqrYT4JrFvzCvf1OpSF3iygdr0dmZ2a+5y7kLAAAAAAAAAADQ9XRoT3HJez+Y+1j+MO+Z/gG/88SEnmsWWzRufuuVeNg594utXn/eMK8Wj0rFD7cS5jVW5IXwtAy49xGmAQAAAAAAAAAArJyWV3u9Sgihhba0J/OVn5//vPO1pV2rk0xoSH//dyMYXEVmeoogDwAAAAAAAAAAYGW1F+ZpI8ebC8592Jz7QKy4Dy3UCnXvFe9+fSmBVPTuwcK798x3/le28j3m3cfzx7qDrXaUl75yXf0xAAAAAAAAAAAA9Jr2ttlUkWjhxPqae9fxaXc+Vxe0ZZ9t9yLHrI1ntYkEE3Ufnj3gDufCgqr74t1iOp27rUlz66htNpOto+FzruJ+08o1ei1Y3m0249TslB/LJQAAAAAAAAAAAKyAtrfZLDOv/HJRvFklv2xPbOF6rbwXAAAAAAAAAAAA6FBLe2YeVoa2so4OAAAAAAAAAAAA3YIwr+OZmsntqx3nBbPbNo7bDbkLAAAAAAAAAACAFdD2M/PMwrODNbd9sc/MGx6LO0T1qbafmWdu9+yUW9Rz8KqjcSRd61DutqbcP3QZn5lX3qdK4fZYkBeDis9H3pB6sXpF+yoS70vj+WMR3/I2pfM+M6+IM+J8teVwsNy41OLfFqKfTd/hZYu6rFuZugELLsrFuSf0hXSxVu80AAAAAAAAAABAVyLMu9ZyhnmJhRDFycVovvWZW+j3lfTdtLkqrwzzQrCPz025/WV/80jc6H38tlb8be2cszyfxVCEINcjbAvp/GfU9Dvm9Ik+1cdPHtAX8zEAAAAAAAAAAICexDab15l679T5G72Xn2i5LSHIe5lzci6/lPBmvWxezra7pq4ZZqZRed9/Hdqgc/521+fG0h37QgzhW1tG497GhQEAAAAAAAAAAHoUYd5KKAO5dtsSlKsgQ5STuStnJ/SiE/1+Y8vMTpTGayG1MjSs+G3pxderY/HB5kEAAAAAAAAAAIDeQ5jXrcrALoSLFS8nmoUmc3r4umySuczKQM953y8aHxsajb+bywAAAAAAAAAAAD2FMK9LlVtpmsox94KezqWGiunBYOE75fPvOl5jZaJXtfjo1t3xzkYNAAAAAAAAAACghxDmdTEVd+DkEX0pdxtOHtAX1dxjZsE6drvNVzIR3+c3SMU+IQ8bv1cAAAAAAAAAANBTCEe6ULnqzix8r6jLl3PpVU5Pua9Y1M+tidV5SbnlZhQbufVp+ZlcAgAAAAAAAAAA6AmEed2m3F7Two+juD/84bQ7m6uvEc09GIr4+cbqvE5foWciFefXFSYjuQIAAAAAAAAAANATCPO6gTZX46kvQ7rwQzN/39wBN5WPzuvMQb00NOd+O33gYyGEM43Pl7+GTg32ynFZ3N7sAAAAAAAAAAAA9AbCvOsuWIihfl2bhRdikBkr4md8zX3g9KRO5IsvaGZG67NT7q9c4X5OonwyDfTJMtgLEq7Me50ltiWtArT0UZObeW4eAAAAAAAAAADoJTq0p7jkvR/M/cXRxlaOzw7W3Pbj0+58ri5oeCzuENWnzHKhJcHE3O7ZKTedCwuqjsaRdK1DuduaNDc12/ncpDuaK+XYHxCn+8tnt7WkvE9F+IF598uVoOeiW/4gSr1YVLlSXJQX/ucf3Y9zuS1vH4kD9TfrTRZkfawv71hd1BjU3qUu7k+DvrUM51rReA5giE9umnO7yhAylwEAAAAAAAAAALoaYd61ljnMEwvP9A/4nScm9Fyz2NvSd3O/ev18q/eyEeYV8Ztvu+B2HTmiRS4DAAAAAAAAAAB0NbYsxIoylRNFkbfcBAAAAAAAAAAAwIII8wAAAAAAAAAAAIAORZgHAAAAAAAAAAAAdCjCPAAAAAAAAAAAAKBDEeZhRTmTd1Qqvk8sFwAAAAAAAAAAAPC6dGhPccl7P5j7i6MiZuHZwZrbfnzanc/VBQ2PxR2i+pS1FeIEE3O7Z6fcdC4sqDoaR9K1DuVua9Lc1Gznc5PuaK6UY39AnO63mAuLlc4lFp7pH/A7T0zouWaxaeO43dB/xe4Qa7yr62mUKE62RY2fduo3txrmqUu3sojffNsFt+vIES1yGQAAAAAAAAAAoKsR5l1rhcK8Lfvi+1yI35J083Op62njd5NetPEbaIR5IT65ac7tmpnRei4DAAAAAAAAAAB0NbbZXC0q1gi1eqg1wtDydZtMpT6zV0LuAgAAAAAAAAAAdD3CPKwNzVV9Z+VT2ur6SAAAAAAAAAAAgDWLMA9rg5XbdOrVrU8BAAAAAAAAAAB6AWEeOl+5Kq8IF73I4VwBAAAAAAAAAADoCYR56HiafqVR9cCpSffdXAIAAAAAAAAAAOgJhHnobOkXGurhjIv6mVwBAAAAAAAAAADoGTq0p7jkvR/M/cUptz208OxgzW0/Pu3O5+qChsfiDlF9yiwXWhJMzO2enXLTubCg6mgcSdc6lLutSXNTs53PTbqrz2dLY39AnO63mAuLlc4lFp7pH/A7T0zouWaxactH4ntdPf6LpJufS7hWuSLPwhVn7v7ZSfd3uTqvraP2iKo8nLsAAAAAAAAAsCSzk1r+Dy8ArDpW5qEjqReJhZxzwf3WGwV5AAAAAAAAALDcqmPtLU0BgOVGmIfOUa6KLNcppn9DkCMVb7tnD7ovNg8CAAAAAAAAAAD0HudECgshmIRi0c0aeUuRz7Eo6iWWn5v3fAu1NLYQpSg/n0/1htTStfJnX3O+N2hpgKIhnQErKoZQCxaOxyBfitFG52p296kD7l/zYQAAAAAAAAAAgJ7Enr/oCjwzDwAAAAAAAMBy4pl5ADqDyP8BJJraWeWzlLIAAAAASUVORK5CYII=">
+
+#set($h1List = [])
+#set($IOSDict = [])
+#set($REGDict = [])
+#set($RADDict = [])
+#set($RADDictTest = [])
+#set($SET_REGDict = [])
+#set($SET_PINDict = [])
+#set($ICFNREQDict =  [])
+#set($DSINFODIct =  [])
+#set($SHRQDict = [])
+#set($FolderDict = [])
+#set($MEMDict = [])
+
+#set($maxBitEnd = 0)
+#foreach($vDoc in $documentList )
+    #if($vDoc.document.documentType.documentTypeKey=="RAD")
+        #set($name = $velocityReportUtil.getValueForField($vDoc.document,"name", $dateFormat))
+        #set($RAD_reset_value = $velocityReportUtil.getValueForField($vDoc.document,"register_numeric_address", $dateFormat))
+        #set($RAD_description = $velocityReportUtil.getValueForField($vDoc.document,"description", $dateFormat))
+        #set($dummy = $RADDictTest.add({"Description":$RAD_description,"Name":$name,"Register Numeric Address":$RAD_reset_value}))
+    #end
+#end
+#foreach($vDoc in $documentList )
+    #if($vDoc.document.documentType.documentTypeKey=="REG")
+        #set( $BitFiledPos 	= 0)
+        #set( $lengthBit 	= 1)
+        #set($regAddressName 	= $velocityReportUtil.getValueForField($vDoc.document,"register_address_name", $dateFormat))
+        #set($regOTP 	= $velocityReportUtil.getValueForField($vDoc.document,"non_volatile_backed", $dateFormat))
+        #set($name = $velocityReportUtil.getValueForField($vDoc.document,"name", $dateFormat))
+        #set($REG_reset_value = $velocityReportUtil.getValueForField($vDoc.document,"reset_value", $dateFormat))
+        #set($REG_Positions= $velocityReportUtil.getValueForField($vDoc.document,"bit_positions", $dateFormat))
+        #if( $REG_Positions.contains(":"))
+            #set( $REG_Positions_split 	= $REG_Positions.split(':'))
+            #set( $BitFiledStart  = $REG_Positions_split[1] )
+            #set( $BitFiledEnd  = $REG_Positions_split[0] )
+            #set( $lengthBit     = $REG_Positions_split[0] - $REG_Positions_split[1]+1)
+        #else
+            #set( $BitFiledStart     = $REG_Positions )
+            #set( $BitFiledEnd     = $REG_Positions )
+            #set( $lengthBit  = "1" )
+        #end
+        #set($maxBitEnd = $mathTool.max($maxBitEnd,$BitFiledEnd))
+
+        #set($REG_Type = $velocityReportUtil.getValueForField($vDoc.document,"type", $dateFormat))
+        #set($REG_Description = $velocityReportUtil.getValueForField($vDoc.document,"description", $dateFormat))
+        #set($REG_BitfieldMapping = $velocityReportUtil.getValueForField($vDoc.document,"bitfields_mapping", $dateFormat))
+        #set($REG_HideFromCustomers = $velocityReportUtil.getValueForField($vDoc.document,"hide_from_customers", $dateFormat))
+        #set($REG_numeric_address = $velocityReportUtil.getValueForField($vDoc.document,"numeric_address", $dateFormat))
+        #if($REG_reset_value != "")
+            #set($REG_reset_valueCleaned = $REG_reset_value.replaceAll("\d{0,9}'",""))
+            #set($firstChar = $REG_reset_valueCleaned.substring(0, 1))
+        #if($firstChar == "h")
+            #set($REG_reset_value = $REG_reset_valueCleaned.replaceAll("h","0x"))
+        #elseif($firstChar == "b")
+            #set($REG_reset_value = $REG_reset_valueCleaned.replaceAll("b",""))
+        #elseif($firstChar == "d")
+            #set($REG_reset_value = $REG_reset_valueCleaned.replaceAll("d",""))
+        #end
+    #end
+    #foreach($d  in $RADDictTest)
+    #set($AddressRad = $d.get("Name"))
+        #if($regAddressName == $AddressRad)
+        #set($RAD_description = $d.get("Description"))
+        #break
+        #end
+    #end
+    #if($REG_numeric_address != "")
+        #set($REG_NumericCleaned = $REG_numeric_address.replaceAll("\d{0,9}'",""))
+        #set($firstChar = $REG_NumericCleaned.substring(0, 1))
+    #if($firstChar == "h")
+        #set($REG_numeric_address = $REG_NumericCleaned.replaceAll("h","0x"))
+    #elseif($firstChar == "b")
+        #set($REG_numeric_address = $REG_NumericCleaned.replaceAll("b",""))
+    #elseif($firstChar == "d")
+        #set($REG_numeric_address = $REG_NumericCleaned.replaceAll("d",""))
+    #end
+    #set( $tmp = $REGDict.add({"RAD Description":$RAD_description,"OTP":$regOTP,"Group": Grup,"Numeric Address": $REG_numeric_address,"Sequence":$vDoc.sequence,"Hide From Customers": $REG_HideFromCustomers,"Reset Value": $REG_reset_value, "Register Address":$regAddressName,"Name": $name,"idProj": $vDoc.document.project.id, "id": $vDoc.document.id, "Bit_Start":$BitFiledStart,"Bit_End":$BitFiledEnd,"Length":$lengthBit,"Description":$REG_Description,"Type":$REG_Type,"Bitfield Mapping": $REG_BitfieldMapping}))
+    #else
+        #foreach($d  in $RADDictTest)
+        #set($AddressRad = $d.get("Name"))
+        #if($regAddressName == $AddressRad)
+            #set($RAD_numeric_value = $d.get("Register Numeric Address"))
+            #set($REG_NumericCleaned = $RAD_numeric_value.replaceAll("\d{0,9}'",""))
+            #set($firstChar = $REG_NumericCleaned.substring(0, 1))
+            #if($firstChar == "h")
+                #set($RAD_numeric_value = $REG_NumericCleaned.replaceAll("h","0x"))
+            #elseif($firstChar == "b")
+                #set($RAD_numeric_value = $REG_NumericCleaned.replaceAll("b",""))
+            #elseif($firstChar == "d")
+                #set($RAD_numeric_value = $REG_NumericCleaned.replaceAll("d",""))
+            #end
+            #set( $tmp = $REGDict.add({"RAD Description":$RAD_description,"OTP":$regOTP,"Group": Grup,"Numeric Address": $RAD_numeric_value,"Sequence":$vDoc.sequence,"Hide From Customers": $REG_HideFromCustomers,"Reset Value": $REG_reset_value, "Register Address":$regAddressName,"Name": $name,"idProj": $vDoc.document.project.id, "id": $vDoc.document.id, "Bit_Start":$BitFiledStart,"Bit_End":$BitFiledEnd,"Length":$lengthBit,"Description":$REG_Description,"Type":$REG_Type,"Bitfield Mapping": $REG_BitfieldMapping}))
+            #break
+            #end
+        #end
+    #end
+#end
+    
+    #if($vDoc.document.documentType.documentTypeKey=="SET" )
+        #set($setKey = $velocityReportUtil.getValueForField($vDoc.document,"setKey", $dateFormat))
+        #if($setKey == "REG")
+            #set($dummy = $SET_REGDict.add({"$vDoc.sequence": $vDoc.document.name, "SequenceSETREG": $vDoc.sequence }))
+            #end
+        #if($setKey=="PIN_DESC")
+            #set($dummy = $SET_PINDict.add({"$vDoc.sequence": $vDoc.document.name }))
+            #end
+    #end
+    #if($vDoc.document.documentKey.contains("IOS_CHK"))
+        #set($dummy = $IOSDict.add({"Name": $vDoc.document.name, "Description": $vDoc.document.description}))
+    #end
+    #if($vDoc.document.documentKey.contains("ICFNREQ") or $vDoc.document.documentKey.contains("ICR"))
+        #set($dummy = $ICFNREQDict.add({"Name": $vDoc.document.name, "Description": $vDoc.document.description, "Project": $vDoc.document.project, "Id": $vDoc.document.id, "Sequence": $vDoc.sequence}))
+    #end
+    #if($vDoc.document.documentKey.contains("DS_INFO"))
+        #set( $dspart = $velocityReportUtil.getValueForField($vDoc.document,"datasheet_part", $dateFormat))
+        #set( $dsname = $velocityReportUtil.getValueForField($vDoc.document,"name", $dateFormat))
+        #set( $dsdescrip = $velocityReportUtil.getValueForField($vDoc.document,"description", $dateFormat))
+        #set($dummy = $DSINFODIct.add({"Name": $dsname, "Description": $dsdescrip, "DS Part": $dspart}))
+    #end
+    #if($vDoc.document.documentKey.contains("SHRQ") or $vDoc.document.documentKey.contains("SFSR"))
+        #set($dummy = $SHRQDict.add({"Name": $vDoc.document.name, "Description": $vDoc.document.description, "Project": $vDoc.document.project, "Id": $vDoc.document.id, "Sequence": $vDoc.sequence}))
+    #end
+    #if($vDoc.document.documentType.documentTypeKey=="FLD")
+        #set($dummy = $FolderDict.add({"Sequence": $vDoc.sequence, "Name": $vDoc.document.name }))
+    #end
+    #if($vDoc.document.documentType.documentTypeKey=="MEM")
+        #set($MEMname 	= $velocityReportUtil.getValueForField($vDoc.document,"name", $dateFormat))
+        #set($MEMstartAddress 	= $velocityReportUtil.getValueForField($vDoc.document,"start_address", $dateFormat))
+        #set($MEMendAddress = $velocityReportUtil.getValueForField($vDoc.document,"end_address", $dateFormat))
+        #set($MEMdescription = $velocityReportUtil.getValueForField($vDoc.document,"description", $dateFormat))
+        #set( $tmp = $MEMDict.add({"idProj": $vDoc.document.project.id, "id": $vDoc.document.id,"Description": $MEMdescription,"End Address": $MEMendAddress, "Start Address":$MEMstartAddress,"Name": $MEMname}))
+    #end
+#end
+
+#*
+#if($isIOS == true)
+  #set($h2ListIOS = [])
+    <h1>IOS Checklist</h1>
+    #set($dummy = $h1List.add("IOS Checklist"))
+
+    #foreach($IOS in $IOSDict)
+    #set($name = $IOS.get("Name"))
+    #set($description = $IOS.get("Description"))
+
+      <h2 id="$name">$name</h2>
+      #set($dummy = $h2ListIOS.add($name))
+        #formatRichText($description)
+
+    #end
+	#end
+*#
+#if($showICFunc == true)
+  #set($h2ListICrequirements = [])
+  <h1>IC Requirements</h1>
+  #set($dummy = $h1List.add("IC Requirements"))
+
+  #foreach($ICFNREQ in $ICFNREQDict)
+  #set($name = $ICFNREQ.get("Name"))
+  #set($description = $ICFNREQ.get("Description"))
+  #set($project = $ICFNREQ.get("Project"))
+  #set($id = $ICFNREQ.get("Id"))
+
+      #if($JamaLinks==true)
+        <h2 id="$name"><a href="https://mps-jama.monolithicpower.com/perspective.req?projectId=$project.id&docId=$id" target="_blank">$name</a></h2>
+        #set($dummy = $h2ListICrequirements.add($name))
+      
+      #else
+        <h2 id="$name">$name</h2>
+        #set($dummy = $h2ListICrequirements.add($name))
+      #end
+      #formatRichText($description)
+      
+  #end
+#end
+#if($ds_info == true)
+  #set($h2ListDSINFO = [])
+  <h1>Datasheet Information</h1>
+  #set($dummy = $h1List.add("Datasheet Information"))
+
+  #foreach($DSINFO in $DSINFODIct)
+    #if($vDoc.document.documentKey.contains("DS_INFO"))
+      #set( $DS_INFO_datasheet_part = $DSINFO.get("DS Part"))
+      #set( $DS_INFO_name = $DSINFO.get("Name"))
+      #set( $DS_INFO_description = $DSINFO.get("Description"))
+
+
+        #if($DS_INFO_datasheet_part == "Heading" )
+          <h2 id="$DS_INFO_name">$DS_INFO_name</h2>
+          #set($dummy = $h2ListDSINFO.add($DS_INFO_name))
+          
+          $DS_INFO_description
+        #end
+        #if($DS_INFO_datasheet_part == "Ordering Info" )
+          <h2 id="Ordering information">Ordering information</h2>
+          #set($dummy = $h2ListDSINFO.add("Ordering information"))
+          $DS_INFO_description
+        #end
+        #if($DS_INFO_datasheet_part == "Absolute maximum ratings" )
+        <h2 id="Ordering information">Absolute maximum ratings</h2>
+        #set($dummy = $h2ListDSINFO.add("Ordering information"))
+        $DS_INFO_description
+        #end
+        #if($DS_INFO_datasheet_part == "Package reference" )
+          <h2 id="$DS_INFO_name">$DS_INFO_name</h2>
+          #set($dummy = $h2ListDSINFO.add($DS_INFO_name))
+          $DS_INFO_description
+        #end
+        #if($DS_INFO_datasheet_part == "Functional Block Diagram" )
+          <h2 id="$DS_INFO_name">$DS_INFO_name</h2>
+          #set($dummy = $h2ListDSINFO.add($DS_INFO_name))
+          $DS_INFO_description
+        #end
+        #if($DS_INFO_datasheet_part == "Operation" )
+          <h2 id="$DS_INFO_name">$DS_INFO_name</h2>
+          #set($dummy = $h2ListDSINFO.add($DS_INFO_name))
+          $DS_INFO_description
+        #end
+    #end
+  #end
+#end
+#if($Pin_Desc == true)
+
+<h1> Pin Description </h1>
+#set($dummy = $h1List.add("Pin Description"))
+#set($parentPinDesc = [])
+#set($h2ListPinList = [])
+
+#foreach( $vDoc in $documentList )
+    #if($vDoc.document.documentType.documentTypeKey=="SET")
+      #set( $setKey = $velocityReportUtil.getValueForField($vDoc.document,"setKey", $dateFormat))
+      #if($setKey=="PIN_DESC")
+      <table class=ElecChar>
+              <tr>
+              <th width="10%" >Pin # </th>
+              <th width="10%" >Name</th>
+              <th width="10%" >Type</th>
+              <th width="70%" >Description</th>
+
+              </tr>
+
+      <h2 id="$vDoc.document.name Table"> $vDoc.document.name </h2>
+      #set($dummy = $h2ListPinList.add($vDoc.document.name +" Table"))
+
+        #set($SetSequence = $vDoc.sequence)
+        #set($added = $parentPinDesc.add($vDoc.sequence))
+      #elseif($setKey == "PIN_MUL_DESC")
+      <table class=ElecChar>
+              <tr>
+              <th width="15%" >Name </th>
+              <th width="15%" >Package A</th>
+              <th width="15%" >Package B</th>
+              <th width="15%" >Package C</th>
+              <th width="15%" >Package D</th>
+              <th width="15%" >Type</th>
+              <th width="15%" >Description</th>
+
+              </tr>
+
+      <h2 id="$vDoc.document.name Table"> $vDoc.document.name </h2>
+      #set($dummy = $h2ListPinList.add($vDoc.document.name +" Table"))
+
+        #set($SetSequence = $vDoc.sequence)
+        #set($added = $parentPinDesc.add($vDoc.sequence))
+      #end
+    #elseif($vDoc.document.documentType.documentTypeKey=="PIN_DESC")
+    #set($originalString = $vDoc.sequence)
+    #set($trimmedString = $originalString.replaceAll("\.\d{0,7}$",""))
+    
+    #if($parentPinDesc.contains($trimmedString))
+      #set( $PinList_number = $velocityReportUtil.getValueForField($vDoc.document,"location", $dateFormat))
+      #set( $PinList_name = $velocityReportUtil.getValueForField($vDoc.document,"name", $dateFormat))
+      #set( $PinList_type = $velocityReportUtil.getValueForField($vDoc.document,"type", $dateFormat))
+      #set( $PinList_description = $velocityReportUtil.getValueForField($vDoc.document,"description", $dateFormat))
+      
+      <tr>
+      
+        <td align="center">$PinList_number</td>
+      
+      #if($JamaLinks==true)
+        <td align="center"><a href="https://mps-jama.monolithicpower.com/perspective.req?projectId=$vDoc.document.project.id&docId=$vDoc.document.id" target="_blank">$PinList_name</a></td>
+      #else
+      <td align="center">$PinList_name </td>
+      #end
+      <td align="center">$PinList_type </td>
+      <td style="text-align: left !important;">$PinList_description</td>
+      </tr>
+      #end
+    #elseif($vDoc.document.documentType.documentTypeKey=="PIN_MUL_DESC")
+    #set($originalString = $vDoc.sequence)
+    #set($trimmedString = $originalString.replaceAll("\.\d{0,7}$",""))
+    
+    #if($parentPinDesc.contains($trimmedString))
+      #set( $PinList_number = $velocityReportUtil.getValueForField($vDoc.document,"location", $dateFormat))
+      #set( $PinList_name = $velocityReportUtil.getValueForField($vDoc.document,"name", $dateFormat))
+      #set( $PinList_description = $velocityReportUtil.getValueForField($vDoc.document,"description", $dateFormat))
+      #set( $PinList_PackageA = $velocityReportUtil.getValueForField($vDoc.document,"package_a_location", $dateFormat))
+      #set( $PinList_PackageB = $velocityReportUtil.getValueForField($vDoc.document,"package_b_location", $dateFormat))
+      #set( $PinList_PackageC = $velocityReportUtil.getValueForField($vDoc.document,"package_c_location", $dateFormat))
+      #set( $PinList_PackageD = $velocityReportUtil.getValueForField($vDoc.document,"package_d_location", $dateFormat))
+      #set( $PinList_Type = $velocityReportUtil.getValueForField($vDoc.document,"type", $dateFormat))
+      
+      
+      <tr>
+      #if($JamaLinks==true)
+        <td><a href="https://mps-jama.monolithicpower.com/perspective.req?projectId=$vDoc.document.project.id&docId=$vDoc.document.id" target="_blank">$PinList_name</a></td>
+      #else
+        <td >$PinList_name</td>
+      #end
+      
+      <td >$PinList_PackageA </td>
+      <td >$PinList_PackageB </td>
+      <td >$PinList_PackageC </td>
+      <td >$PinList_PackageD </td>
+      <td >$PinList_Type </td>
+      <td style="text-align: left !important;">$PinList_description</td>
+      </tr>
+      #end
+    #end
+  #end
+  </table>
+  <br>
+#end
+#if($showStakeholder == true)
+    #set($h2ListStakeH = [])
+    <h1>Stakeholder Reqs</h1>
+    #set($dummy = $h1List.add("Stakeholder Reqs"))
+    #foreach($SHRQ in $SHRQDict)
+
+      #set($name = $SHRQ.get("Name"))
+      #set($description = $SHRQ.get("Description"))
+      #set($project = $SHRQ.get("Project"))
+      #set($id = $SHRQ.get("Id"))
+      #set($sequence = $SHRQ.get("Sequence"))
+      #set($trimmedString = $sequence.replaceAll("\.\d{0,7}$",""))
+
+      #if($trimmedString != $oldtrimmedString)
+      #foreach($FLD in $FolderDict)
+        #set($nameFLD = $FLD.get("Name"))
+        #set($sequenceFLD = $FLD.get("Sequence"))
+
+        #if($trimmedString == $sequenceFLD)
+        <h2 id="$nameFLD"> $nameFLD </h2>
+        #set($dummy = $h2ListStakeH.add($nameFLD))
+        #break
+        #end
+      #end
+      #end
+      #set($oldtrimmedString = $trimmedString)
+
+        #if($JamaLinks==true)
+          <h3 id="$name"><a href="https://mps-jama.monolithicpower.com/perspective.req?projectId=$project.id&docId=$id" target="_blank">$name</a></h3>
+        
+        #else
+          <h3 id="$name">$name</h3>
+        #end
+        #formatRichText($description)
+    #end
+	#end
+#if($isIcreq == true)
+
+    <h1> Electrical Requirements </h1>
+    #set($finalSize = $documentList.size())
+    #set($dummy = $h1List.add("Electrical Requirements"))
+    #set($h2ListElectrical = [])
+
+
+    #set($SetSequence="XX")
+    #set($parentAbsolute = [])
+    #set($globalConditions = [])
+    #set($n = 1)
+    #ResetElectricValues()
+    #foreach( $vDoc in $documentList )
+      
+      #if($vDoc.document.documentType.documentTypeKey=="FLD" )
+              #if(($vDoc.document.name.toLowerCase()) == "absolute maximum" || ($vDoc.document.name.toLowerCase()) == "absolute maximum ratings")
+                #set($added = $parentAbsolute.add($vDoc.sequence))
+                <h2 id="$vDoc.document.name">$vDoc.document.name </h2>
+                #set($dummy = $h2ListElectrical.add($vDoc.document.name))
+                
+                <table class=ElecChar>
+                <tr>
+                <th width="15%" >Name</th>
+                <th width="35%" >Description</th>
+                <th width="15%" >Condition</th>
+                <th width="10%" >Min</th>
+                <th width="10%" >Max</th>
+                <th width="10%" >Unit</th>
+                </tr>
+              #end
+      #elseif($vDoc.document.documentType.documentTypeKey=="ICREQ" || $vDoc.document.documentType.documentTypeKey=="IC_ELECT" )
+      #set($originalString = $vDoc.sequence)
+      #set($trimmedString = $originalString.replaceAll("\.\d{0,7}$",""))
+      
+      #if($parentAbsolute.contains($trimmedString))
+        #setElectricValues($vDoc)
+
+        #if(($globalConditions.contains($IcReq_globalconditions)) || ($IcReq_globalconditions == ""))
+        
+        #else
+          #set($a = $globalConditions.add($IcReq_globalconditions))
+          #set($IcReq_conditions = $IcReq_conditions + " $n*")
+          #set($n = $n +1)
+          
+        #end
+        
+        <tr>
+        #if($JamaLinks==true)
+          <td><a href="https://mps-jama.monolithicpower.com/perspective.req?projectId=$vDoc.document.project.id&docId=$vDoc.document.id" target="_blank">$IcReq_Name</a></td>
+        #else
+          <td >$IcReq_Name</td>
+        #end
+        
+        <td  >$vDoc.document.description </td>
+
+
+        #if($IcReq_conditions == "")
+        <td width="5%">$IcReq_conditions</td>
+        #else
+
+        #if($IcReq_conditions == $oldIcReq_conditions)
+        #else
+        
+        #set($startPoint = $foreach.index)
+        #set($range = [$startPoint..$finalSize])
+        #mergeCellsConditions($trimmedString $range $IcReq_conditions $startPoint)
+
+        #if($cmpt == 1)
+          <td width="5%">$IcReq_conditions</td>
+        #else
+          <td width="5%" rowspan="$cmpt">$IcReq_conditions</td>
+        #end
+
+        #end  
+        #end
+
+        #if($IcReq_minm == "")
+        <td width="5%">$IcReq_minm</td>
+        #else
+
+        #if($IcReq_minm == $oldIcReq_minm)
+        #else
+        
+        #set($startPoint = $foreach.index)
+        #set($range = [$startPoint..$finalSize])
+        #mergeCellsMinm($trimmedString $range $IcReq_minm $startPoint)
+
+        #if($cmpt == 1)
+          <td width="5%">$IcReq_minm</td>
+        #else
+          <td width="5%" rowspan="$cmpt">$IcReq_minm</td>
+        #end
+
+        #end  
+        #end
+
+        #if($IcReq_maxm == "")
+        <td width="5%">$IcReq_maxm</td>
+        #else
+
+        #if($IcReq_maxm == $oldIcReq_maxm)
+        #else
+        
+        #set($startPoint = $foreach.index)
+        #set($range = [$startPoint..$finalSize])
+        #mergeCellsMaxm($trimmedString $range $IcReq_maxm $startPoint)
+
+        #if($cmpt == 1)
+          <td width="5%">$IcReq_maxm</td>
+        #else
+          <td width="5%" rowspan="$cmpt">$IcReq_maxm</td>
+        #end
+
+        #end  
+        #end
+
+        #if($IcReq_unt == "")
+        <td width="5%">$IcReq_unt</td>
+        #else
+
+        #if($IcReq_unt == $oldIcReq_unt)
+        #else
+        #set($cmpt = 1)
+        #foreach($vDoc in $documentList)
+          #if($vDoc.document.documentType.documentTypeKey=="ICREQ" || $vDoc.document.documentType.documentTypeKey=="IC_ELECT")
+          #set($trimmedString2 = $vDoc.sequence.replaceAll("\.\d{0,7}$",""))
+          #if($trimmedString == $trimmedString2)
+            #set($IcReq_conditionsNew = $velocityReportUtil.getValueForField($vDoc.document,"unt", $dateFormat))
+            #if($IcReq_conditionsNew == $IcReq_conditionsNewOld)
+            #if($IcReq_conditionsNew == $IcReq_unt)
+            #set($cmpt = $cmpt + 1)
+            #end
+            #end
+            #set($IcReq_conditionsNewOld = $IcReq_conditionsNew)
+          #end
+          #end
+        #end
+        #if($cmpt == 1)
+        <td width="5%">$IcReq_unt</td>
+        #else
+        <td width="5%" rowspan="$cmpt">$IcReq_unt</td>
+        #end
+        #end
+        #end
+
+        #SetElectricOldValue($IcReq_unt $IcReq_symbol $IcReq_Name $IcReq_conditions $IcReq_minm $IcReq_typc $IcReq_maxm)
+
+        </tr>
+        #end
+      #end
+    #end
+    </table>
+    <br>
+    #if($globalConditions == [])
+    #else
+    
+    <p style="font-size:10pt"><b> NOTES: </b></p>
+    <ol>
+    #foreach($gcondition in $globalConditions)
+    <li>$gcondition</li>
+    
+    #end
+    </ol>
+    
+    <br>
+    #end
+
+
+    
+    #set($SetSequence="XX")
+    #set($parentDischarge = [])
+    #set($globalConditions = [])
+    #set($n = 1)
+    #ResetElectricValues()
+    #set($parentElecREG = [])
+    
+    #foreach( $vDoc in $documentList )
+    #if($vDoc.document.documentType.documentTypeKey=="SET")
+        #set( $setKey = $velocityReportUtil.getValueForField($vDoc.document,"setKey", $dateFormat))
+        #if($setKey=="ICREQ" || $setKey=="ICECREQ" || $setKey== "IC_ELECT")
+          #set($SetSequence = $vDoc.sequence)
+          #set($added = $parentElecREG.add($vDoc.sequence))
+        #end
+      #end
+      #if($vDoc.document.documentType.documentTypeKey=="FLD" )
+      #set($original = $vDoc.sequence)
+      #set($sequenceREG = $original.replaceAll("\.\d{0,7}$",""))
+      
+      #if($parentElecREG.contains($sequenceREG))
+              #if(($vDoc.document.name.toLowerCase()) == "electrostatic discharge (esd) rating" || ($vDoc.document.name.toLowerCase()) == "esd absolute maximum ratings" || ($vDoc.document.name.toLowerCase()) == "electrostatic discharge rating")
+                #set($added = $parentDischarge.add($vDoc.sequence))
+                <h2 id="$vDoc.document.name">Electrostatic Discharge (ESD) Rating</h2>
+                #set($dummy = $h2ListElectrical.add($vDoc.document.name))
+                <table class=ElecChar>
+                <tr>
+                <th width="15%" >Name</th>
+                <th width="35%" >Description</th>
+                <th width="15%" >Condition</th>
+                <th width="10%" >Min</th>
+                <th width="10%" >Max</th>
+                <th width="10%" >Unit</th>
+                </tr>
+              #end
+              #end
+      #elseif($vDoc.document.documentType.documentTypeKey=="ICREQ"||$vDoc.document.documentType.documentTypeKey=="IC_ELECT")
+      #set($originalString = $vDoc.sequence)
+      #set($trimmedString = $originalString.replaceAll("\.\d{0,7}$",""))
+      
+      #if($parentDischarge.contains($trimmedString))
+        #setElectricValues($vDoc)
+
+        #if(($globalConditions.contains($IcReq_globalconditions)) || ($IcReq_globalconditions == ""))
+        
+        #else
+          #set($a = $globalConditions.add($IcReq_globalconditions))
+          #set($IcReq_conditions = $IcReq_conditions + " $n*")
+          #set($n = $n +1)
+        #end
+        
+        <tr>
+        #if($JamaLinks==true)
+          <td><a href="https://mps-jama.monolithicpower.com/perspective.req?projectId=$vDoc.document.project.id&docId=$vDoc.document.id" target="_blank">$IcReq_Name</a></td>
+        #else
+        #if($IcReq_Name == "")
+        <td width="5%">$IcReq_Name</td>
+        #else
+
+        #if($IcReq_Name == $oldIcReq_Name)
+        #else
+        
+        #set($startPoint = $foreach.index)
+        #set($range = [$startPoint..$finalSize])
+        #mergeCellsName($trimmedString $range $IcReq_Name $startPoint)
+
+        #if($cmpt == 1)
+          <td width="5%">$IcReq_Name</td>
+        #else
+          <td width="5%" rowspan="$cmpt">$IcReq_Name</td>
+        #end
+
+        #end  
+        #end
+
+        #end
+        
+        <td >$vDoc.document.description </td>
+
+
+        #if($IcReq_conditions == "")
+        <td width="5%">$IcReq_conditions</td>
+        #else
+
+        #if($IcReq_conditions == $oldIcReq_conditions)
+        #else
+        
+        #set($startPoint = $foreach.index)
+        #set($range = [$startPoint..$finalSize])
+        #mergeCellsConditions($trimmedString $range $IcReq_conditions $startPoint)
+
+        #if($cmpt == 1)
+          <td width="5%">$IcReq_conditions</td>
+        #else
+          <td width="5%" rowspan="$cmpt">$IcReq_conditions</td>
+        #end
+
+        #end  
+        #end
+
+        #if($IcReq_minm == "")
+        <td width="5%">$IcReq_minm</td>
+        #else
+
+        #if($IcReq_minm == $oldIcReq_minm)
+        #else
+        
+        #set($startPoint = $foreach.index)
+        #set($range = [$startPoint..$finalSize])
+        #mergeCellsMinm($trimmedString $range $IcReq_minm $startPoint)
+
+        #if($cmpt == 1)
+          <td width="5%">$IcReq_minm</td>
+        #else
+          <td width="5%" rowspan="$cmpt">$IcReq_minm</td>
+        #end
+
+        #end  
+        #end
+
+        #if($IcReq_maxm == "")
+        <td width="5%">$IcReq_maxm</td>
+        #else
+
+        #if($IcReq_maxm == $oldIcReq_maxm)
+        #else
+        
+        #set($startPoint = $foreach.index)
+        #set($range = [$startPoint..$finalSize])
+        #mergeCellsMaxm($trimmedString $range $IcReq_maxm $startPoint)
+
+        #if($cmpt == 1)
+          <td width="5%">$IcReq_maxm</td>
+        #else
+          <td width="5%" rowspan="$cmpt">$IcReq_maxm</td>
+        #end
+
+        #end  
+        #end
+
+        #if($IcReq_unt == "")
+        <td width="5%">$IcReq_unt</td>
+        #else
+
+        #if($IcReq_unt == $oldIcReq_unt)
+        #else
+        
+        #set($startPoint = $foreach.index)
+        #set($range = [$startPoint..$finalSize])
+        #mergeCellsUnit($trimmedString $range $IcReq_unt $startPoint)
+
+        #if($cmpt == 1)
+          <td width="5%">$IcReq_unt</td>
+        #else
+          <td width="5%" rowspan="$cmpt">$IcReq_unt</td>
+        #end
+
+        #end  
+        #end
+
+
+        #SetElectricOldValue($IcReq_unt $IcReq_symbol $IcReq_Name $IcReq_conditions $IcReq_minm $IcReq_typc $IcReq_maxm)
+        </tr>
+        #end
+      #end
+    #end
+    </table>
+    <br>
+    #if($globalConditions == [])
+    #else
+    
+    <p style="font-size:10pt"><b> NOTES: </b></p>
+    <ol>
+    #foreach($gcondition in $globalConditions)
+    <li>$gcondition</li>
+    
+    #end
+    </ol>
+    
+    <br>
+    #end
+
+
+
+
+    #set($SetSequence="XX")
+    #set($parentOpConditions = [])
+    #set($globalConditions = [])
+    #set($n = 1)
+    #ResetElectricValues()
+    #set($parentElecREG = [])
+    
+    #foreach( $vDoc in $documentList )
+    #if($vDoc.document.documentType.documentTypeKey=="SET")
+        #set( $setKey = $velocityReportUtil.getValueForField($vDoc.document,"setKey", $dateFormat))
+        #if($setKey=="ICREQ" || $setKey=="ICECREQ" || $setKey== "IC_ELECT")
+          #set($SetSequence = $vDoc.sequence)
+          #set($added = $parentElecREG.add($vDoc.sequence))
+        #end
+      #end
+      #if($vDoc.document.documentType.documentTypeKey=="FLD" )
+      #set($original = $vDoc.sequence)
+      #set($sequenceREG = $original.replaceAll("\.\d{0,7}$",""))
+      
+      #if($parentElecREG.contains($sequenceREG))
+              #if(($vDoc.document.name.toLowerCase()) == "recommended operating conditions" || ($vDoc.document.name.toLowerCase()) == "operating conditions")
+                #set($added = $parentOpConditions.add($vDoc.sequence))
+                    <h2 id="$vDoc.document.name">Recommended Operating Conditions</h2>
+                    #set($dummy = $h2ListElectrical.add($vDoc.document.name))
+                    <table class=ElecChar>
+                    <tr>
+                    <th width="20%" >Name</th>
+                    <th width="35%" >Description</th>
+                    <th width="15%" >Min</th>
+                    <th width="15%" >Max</th>
+                    <th width="15%" >Unit</th>
+                    </tr>
+              #end
+              #end
+      #elseif($vDoc.document.documentType.documentTypeKey=="ICREQ"|| $vDoc.document.documentType.documentTypeKey=="IC_ELECT")
+      #set($originalString = $vDoc.sequence)
+      #set($trimmedString = $originalString.replaceAll("\.\d{0,7}$",""))
+      
+        #if($parentOpConditions.contains($trimmedString))
+        #setElectricValues($vDoc)
+
+        #if(($globalConditions.contains($IcReq_globalconditions)) || ($IcReq_globalconditions == ""))
+        
+        #else
+          #set($a = $globalConditions.add($IcReq_globalconditions))
+          #set($IcReq_conditions = $IcReq_conditions + " $n*")
+          #set($n = $n +1)
+        #end
+        
+        <tr>
+        #if($JamaLinks==true)
+          <td><a href="https://mps-jama.monolithicpower.com/perspective.req?projectId=$vDoc.document.project.id&docId=$vDoc.document.id" target="_blank">$IcReq_Name</a></td>
+        #else
+        #if($IcReq_Name == "")
+        <td width="5%">$IcReq_Name</td>
+        #else
+
+        #if($IcReq_Name == $oldIcReq_Name)
+        #else
+        
+        #set($startPoint = $foreach.index)
+        #set($range = [$startPoint..$finalSize])
+        #mergeCellsName($trimmedString $range $IcReq_Name $startPoint)
+
+        #if($cmpt == 1)
+          <td width="5%">$IcReq_Name</td>
+        #else
+          <td width="5%" rowspan="$cmpt">$IcReq_Name</td>
+        #end
+
+        #end  
+        #end
+
+        #end
+        
+        #if($IcReq_conditions == "")
+        <td width="5%">$IcReq_conditions</td>
+        #else
+
+        #if($IcReq_conditions == $oldIcReq_conditions)
+        #else
+        
+        #set($startPoint = $foreach.index)
+        #set($range = [$startPoint..$finalSize])
+        #mergeCellsConditions($trimmedString $range $IcReq_conditions $startPoint)
+
+        #if($cmpt == 1)
+          <td width="5%">$IcReq_conditions</td>
+        #else
+          <td width="5%" rowspan="$cmpt">$IcReq_conditions</td>
+        #end
+
+        #end  
+        #end
+
+        #if($IcReq_minm == "")
+        <td width="5%">$IcReq_minm</td>
+        #else
+
+        #if($IcReq_minm == $oldIcReq_minm)
+        #else
+        
+        #set($startPoint = $foreach.index)
+        #set($range = [$startPoint..$finalSize])
+        #mergeCellsMinm($trimmedString $range $IcReq_minm $startPoint)
+
+        #if($cmpt == 1)
+          <td width="5%">$IcReq_minm</td>
+        #else
+          <td width="5%" rowspan="$cmpt">$IcReq_minm</td>
+        #end
+
+        #end  
+        #end
+
+        #if($IcReq_maxm == "")
+        <td width="5%">$IcReq_maxm</td>
+        #else
+
+        #if($IcReq_maxm == $oldIcReq_maxm)
+        #else
+        
+        #set($startPoint = $foreach.index)
+        #set($range = [$startPoint..$finalSize])
+        #mergeCellsMaxm($trimmedString $range $IcReq_maxm $startPoint)
+
+        #if($cmpt == 1)
+          <td width="5%">$IcReq_maxm</td>
+        #else
+          <td width="5%" rowspan="$cmpt">$IcReq_maxm</td>
+        #end
+
+        #end  
+        #end
+
+
+        #if($IcReq_unt == "")
+        <td width="5%">$IcReq_unt</td>
+        #else
+
+        #if($IcReq_unt == $oldIcReq_unt)
+        #else
+        
+        #set($startPoint = $foreach.index)
+        #set($range = [$startPoint..$finalSize])
+        #mergeCellsUnit($trimmedString $range $IcReq_unt $startPoint)
+
+        #if($cmpt == 1)
+          <td width="5%">$IcReq_unt</td>
+        #else
+          <td width="5%" rowspan="$cmpt">$IcReq_unt</td>
+        #end
+
+        #end  
+        #end
+        
+        #SetElectricOldValue($IcReq_unt $IcReq_symbol $IcReq_Name $IcReq_conditions $IcReq_minm $IcReq_typc $IcReq_maxm)
+        </tr>
+        #end
+      #end
+    #end
+    </table>
+    <br>
+    #if($globalConditions == [])
+    #else
+    
+    <p style="font-size:10pt"><b> NOTES: </b></p>
+    <ol>
+    #foreach($gcondition in $globalConditions)
+    <li>$gcondition</li>
+    
+    #end
+    </ol>
+    <br>
+    #end
+    
+
+
+    #set($SetSequence="XX")
+    #set($parentThermal = [])
+    #set($globalConditions = [])
+    #set($n = 1)
+    #ResetElectricValues()
+    #set($parentElecREG = [])
+    
+    #foreach( $vDoc in $documentList )
+    #if($vDoc.document.documentType.documentTypeKey=="SET")
+        #set( $setKey = $velocityReportUtil.getValueForField($vDoc.document,"setKey", $dateFormat))
+        #if($setKey=="ICREQ" || $setKey=="ICECREQ" || $setKey== "IC_ELECT")
+          #set($SetSequence = $vDoc.sequence)
+          #set($added = $parentElecREG.add($vDoc.sequence))
+        #end
+      #end
+      #if($vDoc.document.documentType.documentTypeKey=="FLD" )
+      #set($original = $vDoc.sequence)
+      #set($sequenceREG = $original.replaceAll("\.\d{0,7}$",""))
+      
+      #if($parentElecREG.contains($sequenceREG))
+      
+              #if(($vDoc.document.name.toLowerCase()) == "thermal resistance" || ($vDoc.document.name.toLowerCase()) == "temperature" || ($vDoc.document.name.toLowerCase()) == "temperatures" || ($vDoc.document.name.toLowerCase()) == "thermal")
+                #set($added = $parentThermal.add($vDoc.sequence))
+                <h2 id="$vDoc.document.name">Thermal Resistance </h2>
+                #set($dummy = $h2ListElectrical.add($vDoc.document.name))
+                <table class=ElecChar>
+                <tr>
+                <th width="30%" >Name</th>
+                <th width="15%" >Description</th>
+                <th width="20%" >Condition</th>
+                <th width="10%" >Value</th>
+                <th width="10%" >Unit</th>
+                </tr>
+              #end
+      #end
+      #elseif($vDoc.document.documentType.documentTypeKey=="ICREQ"|| $vDoc.document.documentType.documentTypeKey=="IC_ELECT")
+      
+      #set($originalString = $vDoc.sequence)
+      #set($trimmedString = $originalString.replaceAll("\.\d{0,7}$",""))
+      #if($parentThermal.contains($trimmedString))
+      
+        #setElectricValues($vDoc)
+
+        #if(($globalConditions.contains($IcReq_globalconditions)) || ($IcReq_globalconditions == ""))
+        
+        #else
+          #set($a = $globalConditions.add($IcReq_globalconditions))
+          #set($IcReq_conditions = $IcReq_conditions + " $n*")
+          #set($n = $n +1)
+          
+        #end
+
+
+        <tr>
+        #if($JamaLinks==true)
+          <td><a href="https://mps-jama.monolithicpower.com/perspective.req?projectId=$vDoc.document.project.id&docId=$vDoc.document.id" target="_blank">$IcReq_Name</a></td>
+        #else
+
+        #if($IcReq_symbol == "")
+        <td width="5%">$IcReq_symbol</td>
+        #else
+
+        #if($IcReq_symbol == $oldIcReq_symbol)
+        #else
+        
+        #set($startPoint = $foreach.index)
+        #set($range = [$startPoint..$finalSize])
+        #mergeCellsSymbol($trimmedString $range $IcReq_symbol $startPoint)
+
+        #if($cmpt == 1)
+          <td width="5%">$IcReq_symbol</td>
+        #else
+          <td width="5%" rowspan="$cmpt">$IcReq_symbol</td>
+        #end
+
+        #end  
+        #end
+
+        #end
+        
+        #if($IcReq_Name == "")
+        <td width="5%">$IcReq_Name</td>
+        #else
+
+        #if($IcReq_Name == $oldIcReq_Name)
+        #else
+        
+        #set($startPoint = $foreach.index)
+        #set($range = [$startPoint..$finalSize])
+        #mergeCellsName($trimmedString $range $IcReq_Name $startPoint)
+
+        #if($cmpt == 1)
+          <td width="5%">$IcReq_Name</td>
+        #else
+          <td width="5%" rowspan="$cmpt">$IcReq_Name</td>
+        #end
+
+        #end  
+        #end
+
+        #if($IcReq_conditions == "")
+        <td width="5%">$IcReq_conditions</td>
+        #else
+
+        #if($IcReq_conditions == $oldIcReq_conditions)
+        #else
+        
+        #set($startPoint = $foreach.index)
+        #set($range = [$startPoint..$finalSize])
+        #mergeCellsConditions($trimmedString $range $IcReq_conditions $startPoint)
+
+        #if($cmpt == 1)
+          <td width="5%">$IcReq_conditions</td>
+        #else
+          <td width="5%" rowspan="$cmpt">$IcReq_conditions</td>
+        #end
+
+        #end  
+        #end
+
+        #if($IcReq_typc == "")
+        <td width="5%">$IcReq_typc</td>
+        #else
+
+        #if($IcReq_typc == $oldIcReq_typc)
+        #else
+        
+        #set($startPoint = $foreach.index)
+        #set($range = [$startPoint..$finalSize])
+        #mergeCellsTypc($trimmedString $range $IcReq_typc $startPoint)
+
+        #if($cmpt == 1)
+          <td width="5%">$IcReq_typc</td>
+        #else
+          <td width="5%" rowspan="$cmpt">$IcReq_typc</td>
+        #end
+
+        #end  
+        #end
+
+        #if($IcReq_unt == "")
+        <td width="5%">$IcReq_unt</td>
+        #else
+
+        #if($IcReq_unt == $oldIcReq_unt)
+        #else
+        
+        #set($startPoint = $foreach.index)
+        #set($range = [$startPoint..$finalSize])
+        #mergeCellsUnit($trimmedString $range $IcReq_unt $startPoint)
+
+        #if($cmpt == 1)
+          <td width="5%">$IcReq_unt</td>
+        #else
+          <td width="5%" rowspan="$cmpt">$IcReq_unt</td>
+        #end
+
+        #end  
+        #end
+
+
+        #SetElectricOldValue($IcReq_unt $IcReq_symbol $IcReq_Name $IcReq_conditions $IcReq_minm $IcReq_typc $IcReq_maxm)
+        </tr>
+        #end
+      #end
+    #end
+    </table>
+    <br>
+    #if($globalConditions == [])
+    #else
+    
+    <p style="font-size:10pt"><b> NOTES: </b></p>
+    <ol>
+    #foreach($gcondition in $globalConditions)
+    <li>$gcondition</li>
+    
+    #end
+    </ol>
+    
+    <br>
+    #end
+
+
+    #set($IgnoredTables = ["absolute maximum ratings","absolute maximum","temperature","temperatures","thermal","thermal resistance","recommended operating conditions", "operating conditions", "electrostatic discharge (esd) rating"])
+    #set($globalConditions = [])
+    #set($flag = "True")
+    #set($n = 1)
+
+    #ResetElectricValues()
+
+    #set($parentsElec = [])
+    #set($parentElecREG = [])
+    #foreach( $vDoc in $documentList )
+    #if($IgnoredTables.contains($vDoc.document.name.toLowerCase()))
+    #else
+      #if($vDoc.document.documentType.documentTypeKey=="SET")
+        #set( $setKey = $velocityReportUtil.getValueForField($vDoc.document,"setKey", $dateFormat))
+        #if($setKey=="ICREQ" || $setKey=="IC_ELECT")
+          #set($SetSequence = $vDoc.sequence)
+          #set($added = $parentElecREG.add($vDoc.sequence))
+        #end
+      #end
+      #if($vDoc.document.documentType.documentTypeKey=="FLD" )
+      #set($original = $vDoc.sequence)
+      #set($sequenceREG = $original.replaceAll("\.\d{0,7}$",""))
+      #set($GrandParent = $original.replaceAll("\.\d{0,7}.\d{0,7}$",""))
+      
+      #if($parentElecREG.contains($sequenceREG) || $parentElecREG.contains($GrandParent))
+      #if($flag == "True")     
+      <h2 id="Electrical Characteristics">Electrical Characteristics</h2>
+                #set($dummy = $h2ListElectrical.add("Electrical Characteristics"))           
+                <table class=ElecChar>
+                <tr>
+                <th width="30%" >Parameters</th>
+                <th width="15%" >Symbol</th>
+                <th width="30%" >Conditions</th>
+                <th width="5%" >Min</th>
+                <th width="5%" >Typ</th>
+                <th width="5%" >Max</th>
+                <th width="5%" >Unit</th>
+                </tr>
+                #set($flag = "False")
+      #end
+                <tr><td colspan="7" align="center" padding="6pt"><b>$vDoc.document.name </b></td></tr>
+                
+                #set($added = $parentsElec.add($vDoc.sequence))
+      #end
+    
+      #elseif($vDoc.document.documentType.documentTypeKey=="ICREQ"|| $vDoc.document.documentType.documentTypeKey=="IC_ELECT")
+      #set($originalString = $vDoc.sequence)
+      #set($trimmedString = $originalString.replaceAll("\.\d{0,7}$",""))
+      
+      #if($parentsElec.contains($trimmedString))
+
+        #if($trimmedString != $oldtrimmedString)
+        #set($oldIcReq_unt = "")
+        #set($oldIcReq_symbol = "")
+        #set($oldIcReq_Name = "")
+        #set($oldIcReq_conditions = "")
+        #set($oldIcReq_minm = "")
+        #set($oldIcReq_typc = "")
+        #set($oldIcReq_maxm = "")
+        #end
+
+        #setElectricValues($vDoc)
+
+         #if(($globalConditions.contains($IcReq_globalconditions)) || ($IcReq_globalconditions == ""))
+        
+        #else
+          #set($a = $globalConditions.add($IcReq_globalconditions))
+          #set($IcReq_conditions = $IcReq_conditions + " $n*")
+          #set($n = $n +1)
+          
+        #end
+        
+
+        
+        
+        <tr>
+        #if($JamaLinks==true)
+          <td><a href="https://mps-jama.monolithicpower.com/perspective.req?projectId=$vDoc.document.project.id&docId=$vDoc.document.id" target="_blank">$IcReq_Name</a></td>
+        #else
+
+        #if($IcReq_Name == "")
+        <td width="5%">$IcReq_Name</td>
+        #else
+
+        #if($IcReq_Name == $oldIcReq_Name)
+        #else
+        
+        #set($startPoint = $foreach.index)
+        #set($range = [$startPoint..$finalSize])
+        #mergeCellsName($trimmedString $range $IcReq_Name $startPoint)
+
+        #if($cmpt == 1)
+          <td width="5%">$IcReq_Name</td>
+        #else
+          <td width="5%" rowspan="$cmpt">$IcReq_Name</td>
+        #end
+
+        #end  
+        #end
+       
+
+        #end
+
+        #if($IcReq_symbol == "")
+        <td width="5%">$IcReq_symbol</td>
+        #else
+
+        #if($IcReq_symbol == $oldIcReq_symbol)
+        #else
+        
+        #set($startPoint = $foreach.index)
+        #set($range = [$startPoint..$finalSize])
+        #mergeCellsSymbol($trimmedString $range $IcReq_symbol $startPoint)
+
+        #if($cmpt == 1)
+          <td width="5%">$IcReq_symbol</td>
+        #else
+          <td width="5%" rowspan="$cmpt">$IcReq_symbol</td>
+        #end
+
+        #end  
+        #end
+      
+
+        #if($IcReq_conditions == "")
+        <td width="5%">$IcReq_conditions</td>
+        #else
+
+        #if($IcReq_conditions == $oldIcReq_conditions)
+        #else
+        
+        #set($startPoint = $foreach.index)
+        #set($range = [$startPoint..$finalSize])
+        #mergeCellsConditions($trimmedString $range $IcReq_conditions $startPoint)
+
+        #if($cmpt == 1)
+          <td width="5%">$IcReq_conditions</td>
+        #else
+          <td width="5%" rowspan="$cmpt">$IcReq_conditions</td>
+        #end
+
+        #end  
+        #end
+       
+
+        #if($IcReq_minm == "")
+        <td width="5%">$IcReq_minm</td>
+        #else
+
+        #if($IcReq_minm == $oldIcReq_minm)
+        #else
+        
+        #set($startPoint = $foreach.index)
+        #set($range = [$startPoint..$finalSize])
+        #mergeCellsMinm($trimmedString $range $IcReq_minm $startPoint)
+
+        #if($cmpt == 1)
+          <td width="5%">$IcReq_minm</td>
+        #else
+          <td width="5%" rowspan="$cmpt">$IcReq_minm</td>
+        #end
+
+        #end  
+        #end
+       
+
+        #if($IcReq_typc == "")
+        <td width="5%">$IcReq_typc</td>
+        #else
+
+        #if($IcReq_typc == $oldIcReq_typc)
+        #else
+        
+        #set($startPoint = $foreach.index)
+        #set($range = [$startPoint..$finalSize])
+        #mergeCellsTypc($trimmedString $range $IcReq_typc $startPoint)
+
+        #if($cmpt == 1)
+          <td width="5%">$IcReq_typc</td>
+        #else
+          <td width="5%" rowspan="$cmpt">$IcReq_typc</td>
+        #end
+
+        #end  
+        #end
+        
+
+        #if($IcReq_maxm == "")
+        <td width="5%">$IcReq_maxm</td>
+        #else
+
+        #if($IcReq_maxm == $oldIcReq_maxm)
+        #else
+        
+        #set($startPoint = $foreach.index)
+        #set($range = [$startPoint..$finalSize])
+        #mergeCellsMaxm($trimmedString $range $IcReq_maxm $startPoint)
+
+        #if($cmpt == 1)
+          <td width="5%">$IcReq_maxm</td>
+        #else
+          <td width="5%" rowspan="$cmpt">$IcReq_maxm</td>
+        #end
+
+        #end  
+        #end
+       
+
+        #if($IcReq_unt == "")
+        <td width="5%">$IcReq_unt</td>
+        #else
+
+        #if($IcReq_unt == $oldIcReq_unt)
+        #else
+        
+        #set($startPoint = $foreach.index)
+        #set($range = [$startPoint..$finalSize])
+        #mergeCellsUnit($trimmedString $range $IcReq_unt $startPoint)
+
+        #if($cmpt == 1)
+          <td width="5%">$IcReq_unt</td>
+        #else
+          <td width="5%" rowspan="$cmpt">$IcReq_unt</td>
+        #end
+
+        #end  
+        #end
+
+        #SetElectricOldValue($IcReq_unt $IcReq_symbol $IcReq_Name $IcReq_conditions $IcReq_minm $IcReq_typc $IcReq_maxm)
+
+        #set($oldtrimmedString = $trimmedString)
+        
+        </tr>
+      
+      #end
+      #end
+      #end
+    #end
+    </table>
+    <br>
+    
+      #if($globalConditions == [])
+    #else
+    
+    <p style="font-size:12pt"><b> NOTES: </b></p>
+    <ol>
+    #foreach($gcondition in $globalConditions)
+    <li>$gcondition</li>
+    
+    #end
+    </ol>
+    
+    <br>
+    #end
+#end
+#if($mcuProject == true)
+<h1>Memory Map</h1>
+
+#set($dummy = $h1List.add("Memory Map"))
+#set($h2ListMemorymap = [])
+
+
+#foreach($vDoc in $documentList)
+  #if($vDoc.document.documentType.documentTypeKey=="SET" )
+    #set($setKey = $velocityReportUtil.getValueForField($vDoc.document,"setKey", $dateFormat))
+    #if($setKey == "MEM")
+    
+      <h2 id="Memory Map Table"> Memory Map Table</h2>
+      #set($dummy = $h2ListMemorymap.add("Memory Map Table"))
+        <table class=RegAddress2 >
+                <tr>
+                <th width="25%" >Device</th>
+                <th width="25%" >Start Address</th>
+                <th width="25%" >End Address</th>
+                <th width="25%" >Size</th>
+                </tr>
+                
+                #foreach($mem in $MEMDict)
+                #set($MEM_name = $mem.get("Name"))
+                #set($MEM_start_address = $mem.get("Start Address"))
+                #set($MEM_end_address = $mem.get("End Address"))
+                #set($MEM_description = $mem.get("Description"))
+                <tr>
+                #if($JamaLinks==true)
+                  <td align="center"><a href="https://mps-jama.monolithicpower.com/perspective.req?projectId=$mem.get("idProj")&docId=$mem.get("id")" target="_blank">$MEM_name</a></td>
+                #else
+                <td>$MEM_name</td>
+                #end
+                <td>$MEM_start_address</td>
+                <td>$MEM_end_address</td>
+                <td>$MEM_description </td>
+                </tr>
+                #end
+          
+                      
+        </table>
+        
+        #break
+        #end
+    #end
+    
+#end
+#end
+ 
+
+
+
+
+<h1>Registers</h1>
+
+  #set($dummy = $h1List.add("Registers"))
+  #set($h2ListRegisters = [])
+  #set($h2ListRegistersParent = [])
+
+
+
+
+  #set($AddrNameOld ="aa")
+  #set($GrandParentREGOld = "a")
+  #if($maxBitEnd > 15)
+  #set($end = 31)
+  #elseif($maxBitEnd > 7)
+  #set($end = 15)
+  #else 
+  #set($end = 7)
+  #end
+
+
+
+  #set($REGlistCleared = [])
+  #set($titleRegisOld = "xx")
+  #foreach($Bitfield in $REGDict)
+    #set($HideFromCustomers = $Bitfield.get("Hide From Customers"))
+
+    #if($HideFromCustomers == "No")
+    #set($AddrName = $Bitfield.get("Register Address"))
+    #set($RAD_numeric_value = $Bitfield.get("Numeric Address"))
+
+      #if($AddrName != $AddrNameOld)
+      #set($dummy = $REGlistCleared.add($Bitfield))
+      #if($RAD_numeric_value)
+          #set( $tmp = $RADDict.add({"Name":$AddrName,"Register Numeric Address": $RAD_numeric_value}))
+
+      #else
+      
+        #foreach($d  in $RADDictTest)
+          #if($d.containsKey("$AddrName"))
+          #set($RAD_numeric_value = $d.get("Register Numeric Address"))
+            #set( $tmp = $RADDict.add({"Name":$AddrName,"Register Numeric Address": $RAD_numeric_value}))
+          #end
+        #end
+
+      #end
+      #end
+    #set($AddrNameOld = $AddrName)
+    #end
+  #end
+
+
+
+  <h2 id="RegistersTable">Table Register Addresses</h2>
+
+  #if($mcuProject == true)
+   <table class=RegAddress2 >
+                <tr>
+                <th width="20%" >Name</th>
+                <th width="20%" >Register Numeric Address</th>
+                </tr>
+                
+                #foreach($rad in $REGlistCleared)
+                #set($RAD_name = $rad.get("Register Address"))
+                #set($RAD_Numeric_Value = $rad.get("Numeric Address"))
+                <tr>
+                #if($format == "doc")
+                <td>$RAD_name</td>
+                #else
+                <td><a href="#$RAD_name"> $RAD_name</a> </td>
+                #end
+                <td> $RAD_Numeric_Value </td>
+                </tr>
+                #end
+    
+                
+  </table>
+#else
+
+  <br>
+  <table class=RegAddress >
+                <tr>
+                <th width="4%">Add.</th>
+                <th width="11%" >Register Name</th>
+                #set($range = [0..$end])
+                #foreach($i in $range)
+                #set($index = $end - $i)
+                #set($intValues = $index.intValue())
+                  <th> $intValues </th>
+                #end
+                </tr>
+    
+    #foreach($setreg in $SET_REGDict)
+    #set($sequenceSETREG = $setreg.get("SequenceSETREG"))
+    
+    #foreach($Bitfield in $REGlistCleared)
+    
+  
+    #set($AddrName = $Bitfield.get("Register Address"))
+    #set($RegSequence = $Bitfield.get("Sequence"))
+    #set($ParentREG = $RegSequence.replaceAll("\.\d{0,7}$",""))
+    #if($RegSequence.toString().contains($sequenceSETREG))
+    
+
+      #*<tr><td colspan="11">$AddrName</td><tr>
+      <tr>*#
+      #set($NumericAddress = $Bitfield.get("Numeric Address"))
+      <tr>
+          <td>$NumericAddress</td>
+          #if($format == "doc")
+          <td>$AddrName</td>
+          #else
+          <td><a href="#$AddrName">$AddrName</a></td>
+          #end
+      #set($dummy = $h2ListRegisters.add($AddrName))
+      #set($RegSequence = $Bitfield.get("Sequence"))
+      #set($ParentREG = $RegSequence.replaceAll("\.\d{0,7}$",""))
+      #set($dummy = $h2ListRegistersParent.add($ParentREG))
+      #set($listDictionary = [])
+
+      #foreach($bf in $REGDict)
+       
+        #set($AddrNameLoop = $bf.get("Register Address"))
+        #set($SequenceRegLoop = $bf.get("Sequence"))
+        #if($AddrNameLoop ==$AddrName)
+        #if($SequenceRegLoop.toString().contains($sequenceSETREG))
+        #set($HideFromCustomers = $bf.get("Hide From Customers"))
+
+        #if($HideFromCustomers == "No")
+        #set($dummy = $listDictionary.add($bf))
+        #end
+        #end
+        #end
+      #end 
+
+      #set($MaxBit =$end )
+      #set($max = $REGDict.size() - 1)
+      #set($length = $listDictionary.size())
+
+      #foreach($i in [ 1 .. $length ])
+      #set($res = $length - $i)
+          #foreach($j in [ 0 .. $res ])
+          #set($sum = $j + 1)
+          #if($sum == $listDictionary.size())
+            #set($sum = $j)
+          #else
+          
+          #set($bf = $listDictionary[$j])
+          #set($bf2 = $listDictionary[$sum])
+          
+              #if($bf.get("Bit_End") < $bf2.get("Bit_End"))
+                  #set($temp = $listDictionary[$j])
+                  #set($listDictionary[$j] = $listDictionary[$j + 1])
+                  #set($listDictionary[$j + 1] = $temp)
+              #end
+          #end
+          #end
+      #end
+      #foreach($bf in $listDictionary)
+          #set($BStart = $bf.get("Bit_Start"))
+          #set($BEnd = $bf.get("Bit_End"))
+          #set($BLen = $bf.get("Length"))
+          #set($name = $bf.get("Name"))
+          
+          #if($BEnd<$MaxBit)
+            #set($RES_Step=$MaxBit-$BEnd)
+            <td colspan="$RES_Step" align="center">RSV</td>
+          #end
+          <td colspan="$BLen" align="center">$name.toUpperCase()
+          </td>
+          #set($MaxBit=$BEnd-$BLen)
+          #if($bf == $listDictionary[$listDictionary.size() - 1])
+          #if($BStart != 0)
+          <td colspan="$BStart" align="center">RSV</td>
+          #end
+          #end
+      #end
+     </tr>
+    #end
+    #end
+    #end
+  </table>
+  #end
+  <br>
+  <br>
+  <hr width="90%;" color="#1C4EFF" size="4">
+  <br>
+
+#foreach($setreg in $SET_REGDict)
+    #set($sequenceSETREG = $setreg.get("SequenceSETREG"))
+  #foreach($Bitfield in $REGlistCleared)
+  
+    #set($AddrName = $Bitfield.get("Register Address"))
+    #set($RegSequence = $Bitfield.get("Sequence"))
+    #if($RegSequence.toString().contains($sequenceSETREG))
+
+      #set($ParentREG = $RegSequence.replaceAll("\.\d{0,7}$",""))
+      #if($mcuProject == true)
+
+      #foreach($t in $SET_REGDict)
+      #foreach($key in  $t.keySet())
+      #if($RegSequence.contains($key))
+        #set($titleRegis = $t.get("$key"))
+        #if($titleRegis != $titleRegisOld)
+        <h2> $titleRegis </h2>
+        #end
+        #set($titleRegisOld = $titleRegis)
+        #set($dummy = $h2ListRegistersParent.add($key))
+        
+      #end
+      #end
+      #end
+      #set($GrandParentREGOld = $GrandParentREG)
+      <h3 id="$AddrName">$AddrName</h3>
+      #set($RADdescription = $Bitfield.get("RAD Description"))
+      #set($RADaddress = $Bitfield.get("Numeric Address"))
+      $RADdescription
+      <br>
+      Address: $RADaddress
+      
+      #set($dummy = $h2ListRegisters.add($AddrName))
+      
+      #else
+      <h2 id="$AddrName">$AddrName</h2>
+      #set($RADdescription = $Bitfield.get("RAD Description"))
+      #set($RADaddress = $Bitfield.get("Numeric Address"))
+      $RADdescription
+      <br>
+      Address: $RADaddress
+
+      #set($dummy = $h2ListRegisters.add($AddrName))
+      #set($RegSequence = $Bitfield.get("Sequence"))
+      #set($ParentREG = $RegSequence.replaceAll("\.\d{0,7}$",""))
+      #set($dummy = $h2ListRegistersParent.add($ParentREG))
+      #end
+      #set($listDictionary = [])
+
+      #foreach($bf in $REGDict)
+       
+        #set($AddrNameLoop = $bf.get("Register Address"))
+        #set($SequenceRegLoop = $bf.get("Sequence"))
+        #set($ParentREGLoop = $SequenceRegLoop.replaceAll("\.\d{0,7}$",""))
+        #if($AddrNameLoop ==$AddrName)
+        #if($SequenceRegLoop.toString().contains($sequenceSETREG))
+        #if($ParentREGLoop == $ParentREG)
+        #set($HideFromCustomers = $bf.get("Hide From Customers"))
+
+        #if($HideFromCustomers == "No")
+        #set($dummy = $listDictionary.add($bf))
+        #end
+        #end
+        #end
+        #end
+      #end 
+
+    
+      #set($range = [0..$end])
+      <table class=TableBits>
+      <tr>
+      #foreach($i in $range)
+
+      #set($index = $end - $i)
+      #set($intValues = $index.intValue())
+        <th> $intValues </th>
+      #end
+      </tr>
+      <tr>
+      #set($MaxBit =$end )
+      #set($max = $REGDict.size() - 1)
+      #set($length = $listDictionary.size())
+
+      #foreach($i in [ 1 .. $length ])
+      #set($res = $length - $i)
+          #foreach($j in [ 0 .. $res ])
+          #set($sum = $j + 1)
+          #if($sum == $listDictionary.size())
+            #set($sum = $j)
+          #else
+          
+          #set($bf = $listDictionary[$j])
+          #set($bf2 = $listDictionary[$sum])
+          
+              #if($bf.get("Bit_End") < $bf2.get("Bit_End"))
+                  #set($temp = $listDictionary[$j])
+                  #set($listDictionary[$j] = $listDictionary[$j + 1])
+                  #set($listDictionary[$j + 1] = $temp)
+              #end
+          #end
+          #end
+      #end
+      #foreach($bf in $listDictionary)
+          #set($BStart = $bf.get("Bit_Start"))
+          #set($BEnd = $bf.get("Bit_End"))
+          #set($BLen = $bf.get("Length"))
+          #set($name = $bf.get("Name"))
+          #if($BEnd<$MaxBit)
+            #set($RES_Step=$MaxBit-$BEnd)
+            <td colspan="$RES_Step" align="center">RSV</td>
+          #end
+          <td colspan="$BLen" align="center">$name.toUpperCase()</td>
+          #set($MaxBit=$BEnd-$BLen)
+          #if($bf == $listDictionary[$listDictionary.size() - 1])
+          #if($BStart != 0)
+          <td colspan="$BStart" align="center">RSV</td>
+          #end
+          #end
+      #end 
+      </tr>
+      </table>
+      <br>
+      <p></p>
+      <table border="1" class=TableDescription>
+      #if($mcuProject == true)
+      <tr>
+          <th width="6%">Bit</th>
+          <th width="10%">Name</th>
+          <th width="6%" >Type</th>
+        <th width="8%" >Reset Value</th>
+        <th width="6%" >OTP</th>
+          <th width="20%">Description</th>
+          <th width="56%">Bitfield Mapping</th>
+      </tr>
+      #else
+      <tr>
+          <th width="6%">Bit</th>
+          <th width="10%">Name</th>
+          <th width="6%" >Type</th>
+        <th width="8%" >Reset Value</th>
+        <th width="6%" >OTP</th>
+          <th width="72%">Description</th>
+      </tr>
+      #end
+  
+  #set($max = $listDictionary.size() - 1)
+      #foreach($i in [$max .. 0 ])
+        #set($bf = $listDictionary[$i])
+  
+          <tr>
+          #if($bf.get("Length")==1)
+            <td align="center">$bf.get("Bit_Start")</td>
+          #else
+            <td align="center">$bf.get("Bit_End"):$bf.get("Bit_Start")</td>
+          #end
+          #if($JamaLinks==true)
+            <td align="center"><a href="https://mps-jama.monolithicpower.com/perspective.req?projectId=$bf.get("idProj")&docId=$bf.get("id")" target="_blank">$bf.get("Name").toUpperCase()</a></td>
+          #else
+            <td align="center">$bf.get("Name").toUpperCase()</td>
+          #end
+          <td align="center">$bf.get("Type")</td>
+          <td align="center">$bf.get("Reset Value")</td>
+          <td align="center">$bf.get("OTP")</td>
+          <td>$bf.get("Description")</td>
+          #if($mcuProject == true)
+          <td>$bf.get("Bitfield Mapping").replace('<table','<table class=bitfield_map').replaceAll("\d{2}'h","0x").replaceAll("\d'h","0x").replaceAll("(s?).'b","0b").replaceAll("\d{2}'d","").replaceAll("\d'd","")</td>
+          #end
+          </tr>
+        
+      #end 
+      </table>
+      <br>
+      #set($AddrNameOld=$AddrName)
+    
+  #end
+#end
+#end
+
+
+</div>
+
+
+#if($format == "doc")
+#else
+<div class="sidebar">
+<div class="sidebar_up">
+<a href="#testrunsum" style="font-size:25px; color:white; font-weight: bold;"> $project.name</a>
+</div>
+<div class="sidebar_content">
+#foreach($va in $h1List)
+  <button class="collapsible"><b>$va</b></button>
+  <div class="content">
+  #if($va == "Registers")
+  <a href="#RegistersTable"><p style="color:#000000; padding-left:10px; margin-top:12px;  margin-bottom:12px; font-size:14px; ">Table Register Addresses</p></a>
+
+  #foreach( $vDoc in $documentList )
+  #if($mcuProject == true)
+      #if($vDoc.document.documentType.documentTypeKey=="SET" )
+      #set($FolderSequence = $vDoc.sequence)
+      #if($h2ListRegistersParent.contains($FolderSequence))
+      <button class="collapsibleChild">$vDoc.document.name</button>
+      <div class="content">
+          #foreach($Bitfield in $REGDict)
+          #set($AddrName = $Bitfield.get("Register Address"))
+          #if($AddrName != $AddrNameOld)
+          #set($Sequence = $Bitfield.get("Sequence"))
+          #if($Sequence.contains($FolderSequence)) 
+          <a href="#$AddrName"><p style="color:#000000; padding-left:25px; margin-top:7px;  margin-bottom:7px;  font-size:12px; ">$AddrName</p></a>
+          #set($AddrNameOld=$AddrName)
+          #end
+          #end
+        #end
+      </div>
+    #end
+    #end
+  #else
+    #if($vDoc.document.documentType.documentTypeKey=="FLD" )
+      #set($FolderSequence = $vDoc.sequence)
+      #if($h2ListRegistersParent.contains($FolderSequence))
+      <button class="collapsibleChild">$vDoc.document.name</button>
+      <div class="content">
+          #foreach($Bitfield in $REGlistCleared)
+          #set($AddrName = $Bitfield.get("Register Address"))
+          #if($AddrName != $AddrNameOld)
+          #set($Sequence = $Bitfield.get("Sequence"))
+          #set($ParentREG = $Sequence.replaceAll("\.\d{0,7}$",""))
+          #if($ParentREG == $FolderSequence) 
+          <a href="#$AddrName"><p style="color:#000000; padding-left:25px; margin-top:7px;  margin-bottom:7px;  font-size:12px; ">$AddrName</p></a>
+          #set($AddrNameOld=$AddrName)
+          #end
+          #end
+        #end
+      </div>
+    #end
+    #end
+  #end
+  #end
+  #elseif($va == "Electrical Requirements")
+    #foreach($reg in $h2ListElectrical)
+      <a href="#$reg"><p style="color:#000000; padding-left:25px; margin-top:7px;  margin-bottom:7px; font-size:12px; ">$reg</p></a>
+    #end
+  #elseif($va == "IOS Checklist")
+    #foreach($reg in $h2ListIOS)
+      <a href="#$reg"><p style="color:#000000; padding-left:25px; margin-top:7px;  margin-bottom:7px; font-size:12px; ">$reg</p></a>
+  #end
+  #elseif($va == "IC Requirements")
+    #foreach($reg in $h2ListICrequirements)
+      <a href="#$reg"><p style="color:#000000; padding-left:25px; margin-top:7px;  margin-bottom:7px; font-size:12px; ">$reg</p></a>
+  #end
+  #elseif($va == "Datasheet Information")
+    #foreach($reg in $h2ListDSINFO)
+      <a href="#$reg"><p style="color:#000000; padding-left:25px; margin-top:7px;  margin-bottom:7px; font-size:12px; ">$reg</p></a>
+      #end
+  #elseif($va == "Stakeholder Reqs")
+  #foreach($reg in $h2ListStakeH)
+      <a href="#$reg"><p style="color:#000000; padding-left:25px; margin-top:7px;  margin-bottom:7px; font-size:12px; ">$reg</p></a>
+  #end
+  #elseif($va == "Pin Description")
+  #foreach($reg in $h2ListPinList)
+      <a href="#$reg"><p style="color:#000000; padding-left:25px; margin-top:7px;  margin-bottom:7px; font-size:12px; ">$reg</p></a>
+  #end
+  #elseif($va == "Memory Map")
+  #foreach($reg in $h2ListMemorymap)
+      <a href="#$reg"><p style="color:#000000; padding-left:25px; margin-top:7px;  margin-bottom:7px; font-size:12px; ">$reg</p></a>
+  #end
+  #end
+  </div>
+
+#end
+</div>
+
+
+</div>
+#end
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "5px";
+    } 
+  });
+}
+</script>
+<script>
+var coll = document.getElementsByClassName("collapsibleChild");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    } 
+
+  });
+}
+</script>
+
+</body>
+</html>
