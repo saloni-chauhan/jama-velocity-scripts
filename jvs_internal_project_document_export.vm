@@ -540,6 +540,7 @@ div.WordSection1
 
 ###### Macros for merging cells, each macro merges specific cells of a column ########
 
+## JSI-4 : a macro named mergeCellsUnit which merges cells of a column
 
 #macro(mergeCellsUnit $trimmedString $range $IcReq_unt $startPoint)
     #set($cmpt = 1)
@@ -574,6 +575,8 @@ div.WordSection1
     #end
 #end
 
+## JSI-4 : a macro named mergeCellsMaxm which merges cells of a column (maximum)
+
 #macro(mergeCellsMaxm $trimmedString $range $IcReq_maxm $startPoint)
     #set($cmpt = 1)
     #set($IcReq_conditionsNewOld = "")
@@ -606,6 +609,8 @@ div.WordSection1
         #end
     #end
 #end
+
+## JSI-4 : a macro named mergeCellsMinm which merges cells of a column (minimum)
 
 #macro(mergeCellsMinm $trimmedString $range $IcReq_minm $startPoint)
     #set($cmpt = 1)
@@ -647,6 +652,8 @@ div.WordSection1
       #end
 #end
 
+## JSI-4 : a macro named mergeCellsTypc which merges cells of a column (based on type)
+
 #macro(mergeCellsTypc $trimmedString $range $IcReq_typc $startPoint)
     #set($cmpt = 1)
     #set($IcReq_conditionsNewOld = "")
@@ -686,6 +693,8 @@ div.WordSection1
         #end
       #end
 #end
+
+## JSI-4 : a macro named mergeCellsName which merges cells of a column (based on name)
 
 #macro(mergeCellsName $trimmedString $range $IcReq_name $startPoint)
     #set($cmpt = 1)
@@ -727,6 +736,8 @@ div.WordSection1
       #end
 #end
 
+## JSI-4 : a macro named mergeCellsSymbol which merges cells of a column (based on symbol)
+
 #macro(mergeCellsSymbol $trimmedString $range $IcReq_symbol $startPoint)
     #set($cmpt = 1)
     #set($IcReq_conditionsNewOld = "")
@@ -766,6 +777,8 @@ div.WordSection1
         #end
       #end
 #end
+
+## JSI-4 : a macro named mergeCellsSymbol which merges cells of a column (based on conditions)
 
 #macro(mergeCellsConditions $trimmedString $range $IcReq_conditions $startPoint)
     #set($cmpt = 1)
@@ -809,6 +822,8 @@ div.WordSection1
 
 ####### Macros For Sets of values #########
 
+## JSI-4 : a macro named setElectricValues which sets the values
+
 #macro(setElectricValues $vDoc)
         #set( $IcReq_symbol = $velocityReportUtil.getValueForField($vDoc.document,"symbol", $dateFormat))
         #set( $IcReq_minm = $velocityReportUtil.getValueForField($vDoc.document,"minm", $dateFormat))
@@ -820,6 +835,8 @@ div.WordSection1
         #set( $IcReq_globalconditions = $velocityReportUtil.getValueForField($vDoc.document,"global_conditions", $dateFormat))
 #end
 
+## JSI-4 : a macro named ResetElectricValues which resets the values
+
 #macro(ResetElectricValues)
     #set($oldIcReq_unt = "")
     #set($oldIcReq_symbol = "")
@@ -829,6 +846,8 @@ div.WordSection1
     #set($oldIcReq_typc = "")
     #set($oldIcReq_maxm = "")
 #end
+
+## JSI-4 : a macro named SetElectricOldValue which sets the old values
 
 #macro(SetElectricOldValue $IcReq_unt $IcReq_symbol $IcReq_Name $IcReq_conditions $IcReq_minm $IcReq_typc $IcReq_maxm)
         #set($oldIcReq_unt = $IcReq_unt)
