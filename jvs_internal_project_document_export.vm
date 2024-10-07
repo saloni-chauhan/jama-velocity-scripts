@@ -37,6 +37,10 @@
     ##
 #end
 
+## JSI-4 : object information extracted for the script to use
+
+## JSI-4 : start of the html design generated for creating the data sheet style
+
 <html
     xmlns:v="urn:schemas-microsoft-com:vml"
     xmlns:o="urn:schemas-microsoft-com:office:office"
@@ -54,6 +58,8 @@
 
         <link rel="themeData" href="test_files/themedata.thmx">
         <link rel="colorSchemeMapping" href="test_files/colorschememapping.xml">
+
+        ## JSI-4 : start of the constants being declared for the report
 
         #########################################################################################################################
         ## **********************************************************************************************************************
@@ -112,6 +118,9 @@
         ##  3. WORD_HTML_HEADER
         ##
         #########################################################################################################################
+
+        ## JSI-4 : html setup for the format document
+
         #if( $format == "doc" )
             <html
                 xmlns:v="3D"
