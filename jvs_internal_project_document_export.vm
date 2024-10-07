@@ -177,6 +177,9 @@
                     ##
                     #########################################################################################################################
                 #else
+
+                    ## JSI-4 : html setup for the format pdf
+
                     <html>
                     #end
                     #########################################################################################################################
@@ -503,6 +506,9 @@ div.WordSection1
 ##                          @sText - string: string you searching                                                     ###
 ##                          @return - array: an array of image sources (url)                                          ###
 #########################################################################################################################
+
+## JSI-4 : a macro named findSourceMHTML which iterates through all img tags and extracts the src atrribute, once found they get stored if they match certain criteria
+
 #macro( findSourceMHTML $sText )
   #set( $findSourceMHTMLReturn = [])
   #set( $lastImageIndex = $sText.lastIndexOf("<img"))  ##>             
