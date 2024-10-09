@@ -863,6 +863,9 @@ div.WordSection1
 ##                      @sText - array: string of source                                                              ###
 ##                      @return - array: returns an array of strings of the new image src                             ###
 #########################################################################################################################
+
+## JSI-4 : a macro named imageArrayMTHML which appends image to the file
+
 #macro( imageArrayMTHML $sText )      
   #set( $imageArrayMHTMLReturn = [])
   #set( $imageSizeArrayMHTMLReturn = [])
@@ -1270,6 +1273,9 @@ div.WordSection1
 ##                           Returns string with images converted to Word shapes                                      ###
 ##                                                                                                                    ###
 #########################################################################################################################
+
+## JSI-4 : a macro named convertFigures which helps with the conversion of figures to shapes or resize them
+
 #macro( convertFigures $input $maxWidth )
   ## clear any previous values
   #set( $width = false )
@@ -1429,6 +1435,9 @@ div.WordSection1
 ##          Input: $inString - input string
 ##          Return: string, ready for opening in Word
 #########################################################################################################################
+
+## JSI-4 : a macro named formatText which formats the text for word document being generated
+
 #macro( formatText $inString )
 #set( $string = $inString )
 ## clear all span satements to remove character formatting
