@@ -501,6 +501,7 @@ div.WordSection1
   .sidebar a:hover {
       background-color:#d7d4d4;
     }
+
 #########################################################################################################################
 ##                         Macro: Returns a source string from a description                                          ###
 ##                          @sText - string: string you searching                                                     ###
@@ -529,14 +530,10 @@ div.WordSection1
   #end
 #end
 
-
-
-
 #########################################################################################################################
 ##                     Macro: List of Macros for Electrical Requirements Tables                                       ###
 ##                                                                                                                    ###
 #########################################################################################################################
-
 
 ###### Macros for merging cells, each macro merges specific cells of a column ########
 
@@ -858,6 +855,7 @@ div.WordSection1
         #set($oldIcReq_typc = $IcReq_typc)
         #set($oldIcReq_maxm = $IcReq_maxm)
 #end
+
 #########################################################################################################################
 ##                     Macro: Returns a source with a new cid and appends the base64 image to the end of the file     ###
 ##                      @sText - array: string of source                                                              ###
@@ -1261,6 +1259,7 @@ div.WordSection1
   #end
 #end
 ##
+
 #macro( convertFiguresWord $input $maxWidth )
   #set( $output=$input)
   $output
@@ -1455,6 +1454,9 @@ $string
 ##                 $tableAlign - left, right, center alignment of table              
 ##          Return: string, ready for opening in Word
 #########################################################################################################################
+
+## JSI-4 : a macro named formatTables which formats the table params width, alignment and the string being returned
+
 #macro( formatTables $inString $maxWidth $tableAlign )
 ##
   #if( $inString.contains("<table") )
@@ -1799,11 +1801,15 @@ $string
 
   $output
 #end
+
 #########################################################################################################################
 ##          Macro: convertHyperlinks
 ##          Input: $inString - input string
 ##          Return: string, ready for opening in Word
 #########################################################################################################################
+
+## JSI-4 : a macro named convertHyperlinks which takes the text from the document source finds it and converts it in a link for the user
+
 #macro( convertHyperlinks $inString )
   ## Reset variables used in the macro
   #set( $subs = [] )
@@ -1902,6 +1908,9 @@ $string
 ##          Input: $inString - input string
 ##          Return: string, ready for opening in Word
 #########################################################################################################################
+
+## JSI-4 : a macro named formatRichText which enriches the text in the word document
+
 #macro( formatRichText $inString )
     #if( $inString )
         #set( $string = $inString.toString() )
@@ -1927,7 +1936,7 @@ $string
     #end
 #end
 
-
+## JSI-4 : css for the document for each section
 
 ##
 img {
@@ -2042,6 +2051,9 @@ img.Header123 {display: block;
 ##
 </head>
 ##
+
+## JSI-4 : the data generation starts here
+
 <body lang=EN-US style='tab-interval:.5in;word-wrap:break-word'>
 ##
 
