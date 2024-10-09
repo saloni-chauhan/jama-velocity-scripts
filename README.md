@@ -1,5 +1,10 @@
 # jama-velocity-scripts
 
-Repository for the JAMA velocity scripts, followed are the names of the scripts included based on the projects being worked on
+# JAMA Velocity Scripts Repository
 
-1. JVS Internal Documentation report (Data-sheet report)
+- **Purpose**: Repository for Velocity scripts used in JAMA.
+- **Contents**: 
+  - List of scripts included.
+  - Organized by the projects currently being worked on.
+
+    1. JVS Internal Documentation report (Data-sheet report)
