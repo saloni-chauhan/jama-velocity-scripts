@@ -1936,6 +1936,42 @@ $string
     #end
 #end
 
+#########################################################################################################################
+##          Macro: sanitizeAndRender
+##          Input: $input - input value
+##          Return: sanitizes the input by replacing special characters with HTML entities and then renders the result.
+#########################################################################################################################
+
+## JSI-4 : a macro named sanitizeAndRender which replaces the special character so they can be rendered properly on html page
+
+#macro(sanitizeAndRender $input)
+    #set($output = $input)
+
+    #if($input.contains("θ"))
+        #set($output = $output.replaceAll("θ", "&theta;"))
+    #end
+    #if($input.contains("°"))
+        #set($output = $output.replaceAll("°", "&deg;"))
+    #end
+    #if($input.contains("&"))
+        #set($output = $output.replaceAll("&", "&amp;"))
+    #end
+    #if($input.contains("<"))
+        #set($output = $output.replaceAll("<", "&lt;"))
+    #end
+    #if($input.contains(">"))
+        #set($output = $output.replaceAll(">", "&gt;"))
+    #end
+    #if($input.contains('"'))  ## Use single quotes around the double quote for escaping
+        #set($output = $output.replaceAll('"', '&quot;'))
+    #end
+    #if($input.contains("'"))  ## Single quotes can remain as is
+        #set($output = $output.replaceAll("'", '&apos;'))
+    #end
+
+    $output
+#end
+
 ## JSI-4 : css for the document for each section
 
 ##
@@ -3217,7 +3253,7 @@ img.Header123 {display: block;
         #else
 
         #if($IcReq_Name == "")
-        <td width="5%">$IcReq_Name</td>
+        <td width="5%">#sanitizeAndRender($IcReq_Name)</td>
         #else
 
         #if($IcReq_Name == $oldIcReq_Name)
@@ -3228,9 +3264,9 @@ img.Header123 {display: block;
         #mergeCellsName($trimmedString $range $IcReq_Name $startPoint)
 
         #if($cmpt == 1)
-          <td width="5%">$IcReq_Name</td>
+          <td width="5%">#sanitizeAndRender($IcReq_Name)</td>
         #else
-          <td width="5%" rowspan="$cmpt">$IcReq_Name</td>
+          <td width="5%" rowspan="$cmpt">#sanitizeAndRender($IcReq_Name)</td>
         #end
 
         #end  
@@ -3345,7 +3381,7 @@ img.Header123 {display: block;
        
 
         #if($IcReq_unt == "")
-        <td width="5%">$IcReq_unt</td>
+        <td width="5%">#sanitizeAndRender($IcReq_unt)</td>
         #else
 
         #if($IcReq_unt == $oldIcReq_unt)
@@ -3356,9 +3392,9 @@ img.Header123 {display: block;
         #mergeCellsUnit($trimmedString $range $IcReq_unt $startPoint)
 
         #if($cmpt == 1)
-          <td width="5%">$IcReq_unt</td>
+          <td width="5%">#sanitizeAndRender($IcReq_unt)</td>
         #else
-          <td width="5%" rowspan="$cmpt">$IcReq_unt</td>
+          <td width="5%" rowspan="$cmpt">#sanitizeAndRender($IcReq_unt)</td>
         #end
 
         #end  
