@@ -1962,10 +1962,10 @@ $string
     #if($input.contains(">"))
         #set($output = $output.replaceAll(">", "&gt;"))
     #end
-    #if($input.contains('"'))  ## Use single quotes around the double quote for escaping
+    #if($input.contains('"'))  ## using single quotes around the double quote for escaping
         #set($output = $output.replaceAll('"', '&quot;'))
     #end
-    #if($input.contains("'"))  ## Single quotes can remain as is
+    #if($input.contains("'"))
         #set($output = $output.replaceAll("'", '&apos;'))
     #end
 
